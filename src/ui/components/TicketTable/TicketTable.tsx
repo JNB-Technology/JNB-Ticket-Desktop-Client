@@ -36,6 +36,28 @@ export const mockTickets: Ticket[] = [
     createdAt: new Date('2024-01-16T09:15:00'),
     updates: 3
   },
+  {
+    id: 'TKT003',
+    title: 'Need help with API integration',
+    priority: 'low',
+    status: 'New',
+    creator: 'Mike Anderson',
+    business: 'Dev Solutions Ltd',
+    assignee: '', // empty string is unassigned
+    createdAt: new Date('2024-01-17T14:20:00'),
+    updates: 0
+  },
+  {
+    id: 'TKT004',
+    title: 'Update payment gateway configuration',
+    priority: 'high',
+    status: 'Completed',
+    creator: 'Sarah Parker',
+    business: 'Finance Plus Inc',
+    assignee: 'Bob Wilson',
+    createdAt: new Date('2024-01-14T16:45:00'),
+    updates: 8
+  },
   // Add more mock data as needed
 ];
 
@@ -52,6 +74,16 @@ export const TicketTable: React.FC = () => {
 
   const getPriorityClass = (priority: string): string => {
     return `priority-badge priority-${priority.toLowerCase()}`;
+  };
+
+  const getStatusClass = (status: string): string => {
+    return `status-badge status-${status.toLowerCase().replace(/\s+/g, '-')}`;
+  };
+
+  const getRowClass = (ticket: Ticket): string => {
+    const statusClass = `status-${ticket.status.toLowerCase().replace(/\s+/g, '-')}`;
+    const unassignedClass = !ticket.assignee ? 'unassigned-ticket' : '';
+    return `ticket-row ${statusClass} ${unassignedClass}`.trim();
   };
 
   return (
@@ -71,7 +103,7 @@ export const TicketTable: React.FC = () => {
       </thead>
       <tbody>
         {mockTickets.map((ticket) => (
-          <tr key={ticket.id}>
+          <tr key={ticket.id} className={getRowClass(ticket)}>
             <td className="ticket-id">{ticket.id}</td>
             <td>{ticket.title}</td>
             <td>
@@ -80,13 +112,17 @@ export const TicketTable: React.FC = () => {
               </span>
             </td>
             <td>
-              <span className="status-badge">
+              <span className={getStatusClass(ticket.status)}>
                 {ticket.status}
               </span>
             </td>
             <td>{ticket.creator}</td>
             <td>{ticket.business}</td>
-            <td>{ticket.assignee}</td>
+            <td>
+              <span className={`assignee-badge ${!ticket.assignee ? 'unassigned' : ''}`}>
+                {ticket.assignee || 'UNASSIGNED'}
+              </span>
+            </td>
             <td>
               <span className="updates-badge">
                 {ticket.updates}

@@ -63,6 +63,26 @@
   background-color: var(--bg-color);
 }
 
+.status-new {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.status-in-progress {
+  background-color: #0ea5e920;
+  color: #38bdf8;
+}
+
+.status-completed {
+  background-color: #22c55e20;
+  color: #4ade80;
+}
+
+.status-open {
+  background-color: #f59e0b20;
+  color: #fbbf24;
+}
+
 .ticket-id {
   font-family: 'Roboto Mono', monospace;
   font-size: 0.85em;
@@ -86,3 +106,103 @@
 .ticket-table tbody tr {
   cursor: pointer;
 }
+
+.unassigned {
+  color: var(--secondary-text);
+  font-style: italic;
+}
+
+.assignee-badge {
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.85em;
+  font-weight: 500;
+}
+
+.assignee-badge.unassigned {
+  background-color: #8b5cf620;
+  color: #a78bfa;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.unassigned-ticket {
+  background-color: #8b5cf610 !important;
+}
+
+.unassigned-ticket:hover {
+  background-color: #8b5cf620 !important;
+}
+
+.unassigned-ticket td {
+  color: #a78bfa;
+}
+
+.unassigned-ticket .ticket-id,
+.unassigned-ticket .updates-badge {
+  color: #a78bfa;
+}
+
+.unassigned-ticket .priority-badge,
+.unassigned-ticket .status-badge {
+  background-color: #8b5cf620;
+  color: #a78bfa;
+}
+
+/* Ensure unassigned tickets keep their styling */
+.unassigned-ticket .status-badge {
+  background-color: #8b5cf620;
+  color: #a78bfa;
+}
+
+/* ...existing styles... */
+
+.ticket-row {
+  transition: background-color 0.2s ease;
+}
+
+.ticket-row.status-in-progress {
+  background-color: #0ea5e910;
+}
+
+.ticket-row.status-in-progress td {
+  color: #38bdf8;
+}
+
+.ticket-row.status-completed {
+  background-color: #22c55e10;
+}
+
+.ticket-row.status-completed td {
+  color: #4ade80;
+}
+
+.ticket-row.status-open {
+  background-color: #f59e0b10;
+}
+
+.ticket-row.status-open td {
+  color: #fbbf24;
+}
+
+/* Hover states for status rows */
+.ticket-row.status-in-progress:hover {
+  background-color: #0ea5e920;
+}
+
+.ticket-row.status-completed:hover {
+  background-color: #22c55e20;
+}
+
+.ticket-row.status-open:hover {
+  background-color: #f59e0b20;
+}
+
+/* Keep badges visible on colored rows */
+.ticket-row .priority-badge,
+.ticket-row .status-badge,
+.ticket-row .updates-badge {
+  background-color: var(--panel-bg-color);
+}
+
+/* ...rest of existing styles... */

@@ -8,10 +8,23 @@ import { pollResources } from './resourceManager.js';
 
 app.on('ready', () => {
     const mainWindow = new BrowserWindow({
+        width: 1200,
+        height: 800,
+        minWidth: 940,
+        minHeight: 600,
+        center: true,
         webPreferences: {
             preload: getPreloadPath(),
-        }
+        },
+        backgroundColor: '#1e2229', // Match your app's background color
+        show: false, // Prevent white flash during load
     });
+
+    // Show window when ready to prevent flash
+    mainWindow.once('ready-to-show', () => {
+        mainWindow.show()
+    });
+
     if(isDev()) {
         mainWindow.loadURL('http://localhost:5123');
     }

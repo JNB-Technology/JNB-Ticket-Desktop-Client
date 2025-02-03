@@ -25,7 +25,6 @@ import {
   faEnvelope,
   faRobot,
   faXmark,
-  faPaperPlane,
   faLock,
   faBan 
 } from '@fortawesome/free-solid-svg-icons'

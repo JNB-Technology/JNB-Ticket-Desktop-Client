@@ -1,0 +1,92 @@
+.view-toggle-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.view-toggle {
+  display: flex;
+  gap: 4px;
+}
+
+.view-toggle-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--panel-bg-color);
+  border: 1px solid var(--border-color);
+  color: var(--secondary-text);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9em;
+  outline: none !important;
+}
+
+.view-toggle-button.active {
+  background: var(--active-nav-bg);
+  color: var(--text-color);
+  border-color: transparent;
+}
+
+.view-toggle-button:hover:not(.active) {
+  background: var(--hover-nav-bg);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+.view-toggle-button:focus {
+  outline: none !important;
+  border-color: var(--border-color) !important;
+}
+
+.view-toggle-button:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.view-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.search-input {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-color);
+  color: var(--text-color);
+  font-size: 0.9em;
+  width: 200px;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #646cff;
+}
+
+.filter-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--panel-bg-color);
+  border: 1px solid var(--border-color);
+  color: var(--secondary-text);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9em;
+}
+
+.filter-button:hover {
+  background: var(--hover-nav-bg);
+  color: var(--text-color);
+}
+
+.filter-button.active {
+  background: var(--active-nav-bg);
+  color: var(--text-color);
+  border-color: transparent;
+}

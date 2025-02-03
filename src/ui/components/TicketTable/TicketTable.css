@@ -1,0 +1,88 @@
+.ticket-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9em;
+}
+
+.ticket-table thead {
+  background-color: var(--panel-bg-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.ticket-table th {
+  padding: 8px 12px;
+  text-align: left;
+  font-weight: 500;
+  color: var(--secondary-text);
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+}
+
+.ticket-table th:hover {
+  background-color: var(--hover-nav-bg);
+}
+
+.ticket-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-color);
+}
+
+.ticket-table tbody tr:hover {
+  background-color: var(--hover-nav-bg);
+}
+
+.priority-badge {
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.85em;
+  font-weight: 500;
+}
+
+.priority-high {
+  background-color: #ff4d4f20;
+  color: #ff4d4f;
+}
+
+.priority-medium {
+  background-color: #faad1420;
+  color: #faad14;
+}
+
+.priority-low {
+  background-color: #52c41a20;
+  color: #52c41a;
+}
+
+.status-badge {
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.85em;
+  font-weight: 500;
+  background-color: var(--bg-color);
+}
+
+.ticket-id {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.85em;
+  color: var(--secondary-text);
+  white-space: nowrap;
+}
+
+.updates-badge {
+  background-color: var(--panel-bg-color);
+  color: var(--text-color);
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.85em;
+  font-weight: 500;
+  display: inline-block;
+  min-width: 16px;
+  text-align: center;
+}
+
+/* Optional: Add hover effect for the entire row */
+.ticket-table tbody tr {
+  cursor: pointer;
+}

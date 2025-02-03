@@ -29,6 +29,9 @@ import {
   faBan 
 } from '@fortawesome/free-solid-svg-icons'
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core'
+import { MyTickets } from './pages/MyTickets';
+import { HistoryPage } from './pages/HistoryPage';
+import { AllTicketsPage } from './pages/AllTicketsPage';
 
 type UserRole = 'agent' | 'super-admin' | 'business-admin' | 'business-employee';
 
@@ -135,8 +138,8 @@ interface UserCredentials {
 const mockUser: UserCredentials = {
   name: 'John Smith',
   email: 'john@business.com',
-  role: 'business-admin',
-  licenseExpiry: new Date('2024-12-31'),
+  role: 'super-admin',
+  licenseExpiry: new Date('2025-12-31'),
   businessName: 'Acme Corp'
 };
 
@@ -207,11 +210,11 @@ function App(): JSX.Element {
   const renderContent = () => {
     switch (currentPage) {
       case 'myTickets':
-        return <h2>My Tickets</h2>;
+        return <MyTickets/>;
       case 'createTicket':
         return <h2>Create New Ticket</h2>;
       case 'history':
-        return <h2>Ticket History</h2>;
+        return <HistoryPage/>;
       case 'profile':
         return <h2>My Profile</h2>;
       case 'teamOverview':
@@ -229,7 +232,7 @@ function App(): JSX.Element {
       case 'notifications':
         return <h2>Notifications</h2>;
       case 'allTickets':
-        return <h2>All Tickets</h2>;
+        return <AllTicketsPage/>;
       case 'assignedTickets':
         return <h2>Tickets Assigned to Me</h2>;
       case 'createdTickets':

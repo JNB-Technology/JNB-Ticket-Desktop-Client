@@ -1,4 +1,3 @@
-import './App.css'
 
 function App() {
   
@@ -6,7 +5,9 @@ function App() {
   return (
     <>
  
-      <h1>Desktop App Template</h1>
+     <div className='bg-blue-500 w-50 h-50 text-white p-4'>
+        <h1 className='text-2xl'>Hello World</h1>
+     </div>
 
     </>
   )

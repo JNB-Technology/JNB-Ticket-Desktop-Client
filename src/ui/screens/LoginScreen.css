@@ -9,6 +9,23 @@
   --login-button-hover: #3fb950;
   --link-color: #58a6ff;
   --link-hover-color: #1f6feb;
+  --particle-color: rgba(255, 255, 255, 0.3); /* Light particles for dark mode */
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg-color: #ffffff;
+    --panel-bg-color: #f0f2f5;
+    --border-color: #bec3c9;
+    --text-color: #1f2328;
+    --secondary-text: #424a53;
+    --hover-nav-bg: #e6e8eb;
+    --login-button-bg: #2ea043;
+    --login-button-hover: #3fb950;
+    --link-color: #58a6ff;
+    --link-hover-color: #1f6feb;
+    --particle-color: rgba(0, 0, 0, 0.1); /* Dark particles for light mode */
+  }
 }
 
 body {
@@ -19,14 +36,52 @@ body {
 }
 
 .login-container {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: var(--bg-color);
+  overflow: hidden;
+}
+
+.animated-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, #1e2229, #24292e, #1e2229);
+  background-size: 300% 300%;
+  animation: gradientAnimation 10s ease infinite;
+  z-index: 0;
+}
+
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+#matrix {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+#particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
 }
 
 .login-panel {
+  position: relative;
   background-color: var(--panel-bg-color);
   padding: 32px;
   border-radius: 8px;
@@ -34,12 +89,17 @@ body {
   width: 100%;
   max-width: 400px;
   text-align: center;
+  z-index: 1;
 }
 
 .login-title {
   margin-bottom: 24px;
   font-size: 1.8em;
   font-weight: 600;
+}
+
+.login-form {
+  padding: 0 16px; /* Add equal padding around the form */
 }
 
 .input-group {

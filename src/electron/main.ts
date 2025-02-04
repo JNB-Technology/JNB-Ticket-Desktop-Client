@@ -8,10 +8,10 @@ import { pollResources } from './resourceManager.js';
 
 app.on('ready', () => {
     const mainWindow = new BrowserWindow({
-        width: 1200,
+        width: 1440,
         height: 800,
-        minWidth: 940,
-        minHeight: 600,
+        minWidth: 1440,
+        minHeight: 800,
         center: true,
         webPreferences: {
             preload: getPreloadPath(),

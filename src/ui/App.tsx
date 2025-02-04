@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { 
   faTicket, 
@@ -187,6 +187,14 @@ function App(): JSX.Element {
   const [isAIChatOpen, setIsAIChatOpen] = useState(false);
   const [chatInput, setChatInput] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Add state for login status
+
+  useEffect(() => {
+    // Check if token exists in localStorage
+    const token = localStorage.getItem('token');
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   const isBusinessUser = mockUser.role === 'business-admin' || mockUser.role === 'business-employee';
   const licenseStatus = formatLicenseExpiry(mockUser.licenseExpiry);

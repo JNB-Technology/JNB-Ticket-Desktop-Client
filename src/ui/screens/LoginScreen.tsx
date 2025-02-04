@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserShield, faUserTie, faUser, faUserSecret } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios'; // Import axios
 import './LoginScreen.css'; // Import the CSS file for styling
 
 interface LoginScreenProps {
@@ -13,9 +14,21 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
   const [rememberMe, setRememberMe] = useState(false);
   const [role, setRole] = useState('Super Admin'); // Add state for role
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    onLogin(email, password, role);
+    try {
+      const response = await axios.post('http://localhost:3232/api/v1/business/login-agent', {
+        email,
+        password,
+      });
+
+      const data = response.data;
+      localStorage.setItem('token', data.token);
+      onLogin(email, password, role);
+    } catch (error) {
+      console.error('Error during login:', error);
+      alert('Login failed. Please check your credentials and try again.');
+    }
   };
 
   useEffect(() => {

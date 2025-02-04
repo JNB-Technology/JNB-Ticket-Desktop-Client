@@ -11,5 +11,8 @@ export default defineConfig({
   server: {
     port: 5123,
     strictPort: true,
-  }
+  },
+  optimizeDeps: {
+    include: ['axios'], // Explicitly include axios for optimization
+  },
 })

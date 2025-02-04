@@ -163,6 +163,30 @@
 
 /* ...existing styles... */
 
+/* Update unassigned styling for consistent color */
+.unassigned-ticket td,
+.unassigned-ticket .ticket-id,
+.unassigned-ticket .status-badge,
+.unassigned-ticket .priority-badge,
+.unassigned-ticket .updates-badge,
+.unassigned-ticket .assignee-badge {
+  color: var(--unassigned-color) !important;
+}
+
+.unassigned-ticket {
+  background-color: var(--unassigned-bg) !important;
+}
+
+.unassigned-ticket:hover {
+  background-color: color-mix(in srgb, var(--unassigned-bg) 80%, white) !important;
+}
+
+/* Remove any conflicting unassigned styles */
+.unassigned-ticket .priority-badge,
+.unassigned-ticket .status-badge {
+  background: none !important;
+}
+
 .ticket-row {
   transition: background-color 0.2s ease;
 }

@@ -2,6 +2,8 @@
   width: 100%;
   border-collapse: collapse;
   font-size: 0.9em;
+  margin: -12px;  /* Negative margin to fill container */
+  width: calc(100% + 24px);  /* Compensate for negative margin */
 }
 
 .ticket-table thead {
@@ -34,53 +36,56 @@
 }
 
 .priority-badge {
-  padding: 2px 8px;
-  border-radius: 12px;
+  padding: 0;
+  border-radius: 4px;
   font-size: 0.85em;
-  font-weight: 500;
+  font-weight: 600;
+  background: none !important;
 }
 
+/* Update priority badge colors */
 .priority-high {
-  background-color: #ff4d4f20;
-  color: #ff4d4f;
+  background-color: var(--priority-high-bg, #ff4d4f20);
+  color: var(--priority-high-color, #ff4d4f);
 }
 
 .priority-medium {
-  background-color: #faad1420;
-  color: #faad14;
+  background-color: var(--priority-medium-bg, #faad1420);
+  color: var(--priority-medium-color, #faad14);
 }
 
 .priority-low {
-  background-color: #52c41a20;
-  color: #52c41a;
+  background-color: var(--priority-low-bg, #52c41a20);
+  color: var(--priority-low-color, #52c41a);
 }
 
+/* Update status badge colors */
 .status-badge {
-  padding: 2px 8px;
-  border-radius: 12px;
+  padding: 0;
+  border-radius: 4px;
   font-size: 0.85em;
-  font-weight: 500;
-  background-color: var(--bg-color);
+  font-weight: 600;
+  background: none !important;
 }
 
 .status-new {
-  background-color: var(--bg-color);
-  color: var(--text-color);
+  background-color: var(--status-new-bg, var(--bg-color));
+  color: var(--status-new-color, var(--text-color));
 }
 
 .status-in-progress {
-  background-color: #0ea5e920;
-  color: #38bdf8;
+  background-color: var(--status-in-progress-bg, #0ea5e920);
+  color: var(--status-in-progress-color, #38bdf8);
 }
 
 .status-completed {
-  background-color: #22c55e20;
-  color: #4ade80;
+  background-color: var(--status-completed-bg, #22c55e20);
+  color: var(--status-completed-color, #4ade80);
 }
 
 .status-open {
-  background-color: #f59e0b20;
-  color: #fbbf24;
+  background-color: var(--status-open-bg, #f59e0b20);
+  color: var(--status-open-color, #fbbf24);
 }
 
 .ticket-id {
@@ -93,13 +98,15 @@
 .updates-badge {
   background-color: var(--panel-bg-color);
   color: var(--text-color);
-  padding: 2px 8px;
-  border-radius: 12px;
+  padding: 0;
+  border-radius: 4px;
   font-size: 0.85em;
   font-weight: 500;
   display: inline-block;
   min-width: 16px;
   text-align: center;
+  background: none !important;
+  color: var(--secondary-text);
 }
 
 /* Optional: Add hover effect for the entire row */
@@ -113,25 +120,24 @@
 }
 
 .assignee-badge {
-  padding: 2px 8px;
-  border-radius: 12px;
+  padding: 0;
+  border-radius: 4px;
   font-size: 0.85em;
   font-weight: 500;
 }
 
+/* Update unassigned colors */
 .assignee-badge.unassigned {
-  background-color: #8b5cf620;
-  color: #a78bfa;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  background-color: var(--unassigned-bg, #8b5cf620);
+  color: var(--unassigned-color, #a78bfa);
 }
 
 .unassigned-ticket {
-  background-color: #8b5cf610 !important;
+  background-color: var(--unassigned-bg, #8b5cf610) !important;
 }
 
 .unassigned-ticket:hover {
-  background-color: #8b5cf620 !important;
+  background-color: var(--unassigned-bg, #8b5cf620) !important;
 }
 
 .unassigned-ticket td {
@@ -162,47 +168,72 @@
 }
 
 .ticket-row.status-in-progress {
-  background-color: #0ea5e910;
+  background-color: var(--row-in-progress-bg, #0ea5e910);
 }
 
-.ticket-row.status-in-progress td {
-  color: #38bdf8;
+.ticket-row.status-in-progress td,
+.ticket-row.status-in-progress .ticket-id,
+.ticket-row.status-in-progress .status-badge,
+.ticket-row.status-in-progress .priority-badge,
+.ticket-row.status-in-progress .updates-badge {
+  color: var(--row-in-progress-color);
 }
 
 .ticket-row.status-completed {
-  background-color: #22c55e10;
+  background-color: var(--row-completed-bg, #22c55e10);
 }
 
-.ticket-row.status-completed td {
-  color: #4ade80;
+.ticket-row.status-completed td,
+.ticket-row.status-completed .ticket-id,
+.ticket-row.status-completed .status-badge,
+.ticket-row.status-completed .priority-badge,
+.ticket-row.status-completed .updates-badge {
+  color: var(--row-completed-color);
 }
 
 .ticket-row.status-open {
-  background-color: #f59e0b10;
+  background-color: var(--row-open-bg, #f59e0b10);
 }
 
-.ticket-row.status-open td {
-  color: #fbbf24;
+.ticket-row.status-open td,
+.ticket-row.status-open .ticket-id,
+.ticket-row.status-open .status-badge,
+.ticket-row.status-open .priority-badge,
+.ticket-row.status-open .updates-badge {
+  color: var(--row-open-color);
+}
+
+.ticket-row.status-new {
+  background-color: var(--row-new-bg, transparent);
+}
+
+.ticket-row.status-new td {
+  color: var(--row-new-color, var(--text-color));
 }
 
 /* Hover states for status rows */
 .ticket-row.status-in-progress:hover {
-  background-color: #0ea5e920;
+  background-color: var(--row-in-progress-hover, #0ea5e920);
 }
 
 .ticket-row.status-completed:hover {
-  background-color: #22c55e20;
+  background-color: var(--row-completed-hover, #22c55e20);
 }
 
 .ticket-row.status-open:hover {
-  background-color: #f59e0b20;
+  background-color: var(--row-open-hover, #f59e0b20);
+}
+
+.ticket-row.status-new:hover {
+  background-color: var(--row-new-hover, var(--hover-nav-bg));
 }
 
 /* Keep badges visible on colored rows */
 .ticket-row .priority-badge,
 .ticket-row .status-badge,
 .ticket-row .updates-badge {
-  background-color: var(--panel-bg-color);
+  background: none;
+  backdrop-filter: none;
 }
 
 /* ...rest of existing styles... */

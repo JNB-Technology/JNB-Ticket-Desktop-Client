@@ -530,16 +530,53 @@ button:focus-visible {
     color: #213547;
     background-color: #ffffff;
 
-    /* GitHub Desktop Light Theme Colors */
+    /* Adjusted Light Theme Colors for Better Contrast */
     --bg-color: #ffffff;
-    --panel-bg-color: #f6f8fa;
-    --border-color: #d0d7de;
-    --text-color: #24292f;
-    --secondary-text: #57606a;
-    --active-nav-bg: #e7ebef;  /* GitHub Desktop's selected item color - light mode */
-    --hover-nav-bg: #f0f3f6;   /* GitHub Desktop's hover color - light mode */
+    --panel-bg-color: #f0f2f5;  /* Slightly darker background */
+    --border-color: #bec3c9;    /* Darker border */
+    --text-color: #1f2328;      /* Darker text */
+    --secondary-text: #424a53;   /* Darker secondary text */
+    --active-nav-bg: #dde1e6;   /* Darker active state */
+    --hover-nav-bg: #e6e8eb;    /* Darker hover state */
     --search-bg: #f0f2f4;
     --search-text: #24292f;
+
+    /* Status and Priority Colors with Better Contrast */
+    --priority-high-bg: #ffebe9;
+    --priority-high-color: #cf222e;
+    --priority-medium-bg: #fff1d4;
+    --priority-medium-color: #b35900;
+    --priority-low-bg: #dafbe1;
+    --priority-low-color: #1a7f37;
+    
+    --status-new-bg: #eaedf0;
+    --status-new-color: #1f2328;
+    --status-in-progress-bg: #ddf4ff;
+    --status-in-progress-color: #0550ae;
+    --status-completed-bg: #dafbe1;
+    --status-completed-color: #1a7f37;
+    --status-open-bg: #fff1d4;
+    --status-open-color: #b35900;
+    
+    --unassigned-bg: #f6f0ff;
+    --unassigned-color: #6b2eb3;
+
+    /* Row background colors for light mode */
+    --row-in-progress-bg: #ddf4ff;
+    --row-in-progress-hover: #b6e3ff;
+    --row-in-progress-color: #0969da;
+    
+    --row-completed-bg: #dafbe1;
+    --row-completed-hover: #b4f1b4;
+    --row-completed-color: #1a7f37;
+    
+    --row-open-bg: #fff8c5;
+    --row-open-hover: #fae17d;
+    --row-open-color: #9a6700;
+    
+    --row-new-bg: #f6f8fa;
+    --row-new-hover: #eaeef2;
+    --row-new-color: #24292f;
   }
   a:hover {
     color: #747bff;

@@ -2,21 +2,43 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 16px;
-  padding: 8px;
+  margin: -12px;
+  padding: 12px;
 }
 
 .ticket-tile {
   background: var(--panel-bg-color);
   border: 1px solid var(--border-color);
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 16px;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+/* Status-based tile styling */
+.ticket-tile.status-in-progress {
+  background: var(--row-in-progress-bg);
+  border-color: var(--row-in-progress-color);
+}
+
+.ticket-tile.status-completed {
+  background: var(--row-completed-bg);
+  border-color: var(--row-completed-color);
+}
+
+.ticket-tile.status-open {
+  background: var(--row-open-bg);
+  border-color: var(--row-open-color);
+}
+
+.ticket-tile.unassigned {
+  background: var(--unassigned-bg);
+  border-color: var(--unassigned-color);
 }
 
 .ticket-tile:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .ticket-tile-header {
@@ -65,4 +87,9 @@
   margin-top: 12px;
   padding-top: 12px;
   border-top: 1px solid var(--border-color);
+}
+
+.unassigned-warning {
+  color: var(--unassigned-color);
+  margin-left: 8px;
 }

@@ -21,12 +21,17 @@ export const AllTicketsPage: React.FC = () => {
               language="json"
               style={vscDarkPlus}
               customStyle={{
-                background: 'var(--panel-bg-color)',
+                background: 'var(--syntax-bg, var(--panel-bg-color))',
+                color: 'var(--syntax-color, var(--text-color))',
                 padding: '16px',
                 borderRadius: '8px',
                 margin: 0,
               }}
               showLineNumbers={true}
+              lineNumberStyle={{
+                color: 'var(--secondary-text)',
+                opacity: 0.5,
+              }}
             >
               {JSON.stringify(mockTickets, null, 2)}
             </SyntaxHighlighter>

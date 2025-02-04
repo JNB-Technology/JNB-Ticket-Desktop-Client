@@ -1,5 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faBuilding, faClock, faComment } from '@fortawesome/free-solid-svg-icons';
+import { 
+  faUser, 
+  faBuilding, 
+  faClock, 
+  faComment,
+  faExclamationTriangle 
+} from '@fortawesome/free-solid-svg-icons';
 import { Ticket } from '../TicketTable/TicketTable';
 import './TicketTiles.css';
 
@@ -20,12 +26,22 @@ export const TicketTiles: React.FC<TicketTilesProps> = ({ tickets }) => {
   return (
     <div className="ticket-tiles">
       {tickets.map((ticket) => (
-        <div key={ticket.id} className="ticket-tile">
+        <div 
+          key={ticket.id} 
+          className={`ticket-tile status-${ticket.status.toLowerCase().replace(/\s+/g, '-')} ${!ticket.assignee ? 'unassigned' : ''}`}
+        >
           <div className="ticket-tile-header">
             <span className="ticket-tile-id">{ticket.id}</span>
-            <span className={`priority-badge priority-${ticket.priority}`}>
-              {ticket.priority}
-            </span>
+            <div>
+              <span className={`priority-badge priority-${ticket.priority}`}>
+                {ticket.priority}
+              </span>
+              {!ticket.assignee && (
+                <span className="unassigned-warning" title="Unassigned ticket">
+                  <FontAwesomeIcon icon={faExclamationTriangle} />
+                </span>
+              )}
+            </div>
           </div>
           <h3 className="ticket-tile-title">{ticket.title}</h3>
           <span className="status-badge">{ticket.status}</span>

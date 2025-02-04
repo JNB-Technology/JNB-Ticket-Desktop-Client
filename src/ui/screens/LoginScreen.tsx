@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserShield, faUserTie, faUser, faUserSecret } from '@fortawesome/free-solid-svg-icons';
 import './LoginScreen.css'; // Import the CSS file for styling
 
 interface LoginScreenProps {
-  onLogin: (email: string, password: string) => void;
+  onLogin: (email: string, password: string, role: string) => void;
 }
 
 const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
+  const [role, setRole] = useState('Super Admin'); // Add state for role
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    onLogin(email, password);
+    onLogin(email, password, role);
   };
 
   useEffect(() => {
@@ -53,6 +56,36 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
       <div className="login-panel">
         <h1 className="login-title">Sign In</h1>
         <form onSubmit={handleLogin} className="login-form">
+          <div className="input-group custom-dropdown">
+            <label htmlFor="role">Login as</label>
+            <div className="dropdown">
+              <button className="dropdown-button">
+                {role === 'Super Admin' && <FontAwesomeIcon icon={faUserShield} />}
+                {role === 'Agent' && <FontAwesomeIcon icon={faUser} />}
+                {role === 'Business Admin' && <FontAwesomeIcon icon={faUserTie} />}
+                {role === 'Employee' && <FontAwesomeIcon icon={faUserSecret} />}
+                <span>{role}</span>
+              </button>
+              <div className="dropdown-content">
+                <div onClick={() => setRole('Super Admin')}>
+                  <FontAwesomeIcon icon={faUserShield} />
+                  <span>Super Admin</span>
+                </div>
+                <div onClick={() => setRole('Agent')}>
+                  <FontAwesomeIcon icon={faUser} />
+                  <span>Agent</span>
+                </div>
+                <div onClick={() => setRole('Business Admin')}>
+                  <FontAwesomeIcon icon={faUserTie} />
+                  <span>Business Admin</span>
+                </div>
+                <div onClick={() => setRole('Employee')}>
+                  <FontAwesomeIcon icon={faUserSecret} />
+                  <span>Employee</span>
+                </div>
+              </div>
+            </div>
+          </div>
           <div className="input-group">
             <label htmlFor="email">Email address</label>
             <input 

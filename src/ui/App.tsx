@@ -32,6 +32,7 @@ import { IconDefinition } from '@fortawesome/fontawesome-svg-core'
 import { MyTickets } from './pages/MyTickets';
 import { HistoryPage } from './pages/HistoryPage';
 import { AllTicketsPage } from './pages/AllTicketsPage';
+import LoginScreen from './screens/LoginScreen';
 
 type UserRole = 'agent' | 'super-admin' | 'business-admin' | 'business-employee';
 
@@ -185,6 +186,7 @@ function App(): JSX.Element {
   const [hoverDescription, setHoverDescription] = useState<string>('');
   const [isAIChatOpen, setIsAIChatOpen] = useState(false);
   const [chatInput, setChatInput] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Add state for login status
 
   const isBusinessUser = mockUser.role === 'business-admin' || mockUser.role === 'business-employee';
   const licenseStatus = formatLicenseExpiry(mockUser.licenseExpiry);
@@ -247,6 +249,19 @@ function App(): JSX.Element {
         return <h2>Page not found</h2>;
     }
   };
+
+  const handleLogin = (email: string, password: string) => {
+    // Dummy login logic
+    if (email === 'user@example.com' && password === 'password') {
+      setIsLoggedIn(true);
+    } else {
+      alert('Invalid login credentials');
+    }
+  };
+
+  if (!isLoggedIn) {
+    return <LoginScreen onLogin={handleLogin} />;
+  }
 
   return (
     <div className={`app-container ${isAIChatOpen ? 'with-ai-panel' : ''}`}>

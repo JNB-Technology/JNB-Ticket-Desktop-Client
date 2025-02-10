@@ -36,6 +36,23 @@
   --license-warning: #dc3545;
   --renew-button-bg: #2ea043;
   --renew-button-hover: #3fb950;
+
+  --priority-high-bg: #ff4d4f20;
+  --priority-high-color: #ff4d4f;
+  --priority-medium-bg: #faad1420;
+  --priority-medium-color: #faad14;
+  --priority-low-bg: #52c41a20;
+  --priority-low-color: #52c41a;
+  --status-new-bg: var(--bg-color);
+  --status-new-color: var(--text-color);
+  --status-in-progress-bg: #0ea5e920;
+  --status-in-progress-color: #38bdf8;
+  --status-completed-bg: #22c55e20;
+  --status-completed-color: #4ade80;
+  --status-open-bg: #f59e0b20;
+  --status-open-color: #fbbf24;
+  --unassigned-bg: #8b5cf620;
+  --unassigned-color: #a78bfa;
 }
 
 a {

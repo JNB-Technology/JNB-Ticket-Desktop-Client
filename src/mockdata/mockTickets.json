@@ -1,0 +1,477 @@
+[
+  {
+    "id": "TKT001",
+    "title": "Unable to access dashboard",
+    "priority": "high",
+    "status": "Open",
+    "creator": "John Smith",
+    "business": "Acme Corp",
+    "assignee": "Jane Doe",
+    "createdAt": "2024-01-15T10:30:00",
+    "updates": 5,
+    "description": "User is unable to access the dashboard after logging in.",
+    "comments": [
+      {
+        "author": "Jane Doe",
+        "text": "Can you provide more details about the issue?",
+        "createdAt": "2024-01-15T11:00:00"
+      },
+      {
+        "author": "John Smith",
+        "text": "Sure, I get a 404 error when I try to access the dashboard.",
+        "createdAt": "2024-01-15T11:15:00"
+      }
+    ],
+    "imageLinks": [
+      "https://example.com/images/dashboard-error.png"
+    ]
+  },
+  {
+    "id": "TKT002",
+    "title": "Login issue after password reset",
+    "priority": "medium",
+    "status": "In Progress",
+    "creator": "Alice Johnson",
+    "business": "Tech Corp",
+    "assignee": "Bob Wilson",
+    "createdAt": "2024-01-16T09:15:00",
+    "updates": 3,
+    "description": "User cannot log in after resetting the password.",
+    "comments": [
+      {
+        "author": "Bob Wilson",
+        "text": "Have you tried clearing your browser cache?",
+        "createdAt": "2024-01-16T10:00:00"
+      },
+      {
+        "author": "Alice Johnson",
+        "text": "Yes, but it didn't help.",
+        "createdAt": "2024-01-16T10:15:00"
+      }
+    ],
+    "imageLinks": [
+      "https://example.com/images/login-issue.png"
+    ]
+  },
+  {
+    "id": "TKT003",
+    "title": "Need help with API integration",
+    "priority": "low",
+    "status": "New",
+    "creator": "Mike Anderson",
+    "business": "Dev Solutions Ltd",
+    "assignee": "",
+    "createdAt": "2024-01-17T14:20:00",
+    "updates": 0,
+    "description": "User needs assistance with integrating the API.",
+    "comments": [],
+    "imageLinks": []
+  },
+  {
+    "id": "TKT004",
+    "title": "Update payment gateway configuration",
+    "priority": "high",
+    "status": "Completed",
+    "creator": "Sarah Parker",
+    "business": "Finance Plus Inc",
+    "assignee": "Bob Wilson",
+    "createdAt": "2024-01-14T16:45:00",
+    "updates": 8,
+    "description": "User requested an update to the payment gateway configuration.",
+    "comments": [
+      {
+        "author": "Bob Wilson",
+        "text": "The payment gateway configuration has been updated.",
+        "createdAt": "2024-01-15T09:00:00"
+      },
+      {
+        "author": "Sarah Parker",
+        "text": "Thank you!",
+        "createdAt": "2024-01-15T09:15:00"
+      }
+    ],
+    "imageLinks": [
+      "https://example.com/images/payment-gateway.png"
+    ]
+  },
+  {
+    "id": "TKT005",
+    "title": "Error 404 on product page",
+    "priority": "medium",
+    "status": "Open",
+    "creator": "David Brown",
+    "business": "Retail Solutions",
+    "assignee": "Alice Johnson",
+    "createdAt": "2024-01-18T11:00:00",
+    "updates": 2,
+    "description": "User reports a 404 error on the product page.",
+    "comments": [
+      {
+        "author": "Alice Johnson",
+        "text": "Can you provide the URL of the product page?",
+        "createdAt": "2024-01-18T11:30:00"
+      },
+      {
+        "author": "David Brown",
+        "text": "Sure, it's https://example.com/product/123",
+        "createdAt": "2024-01-18T11:45:00"
+      }
+    ],
+    "imageLinks": [
+      "https://example.com/images/404-error.png"
+    ]
+  },
+  {
+    "id": "TKT006",
+    "title": "Slow website performance",
+    "priority": "high",
+    "status": "In Progress",
+    "creator": "Emma White",
+    "business": "Web Services Inc",
+    "assignee": "John Smith",
+    "createdAt": "2024-01-19T09:45:00",
+    "updates": 4,
+    "description": "User reports slow performance on the website.",
+    "comments": [
+      {
+        "author": "John Smith",
+        "text": "We are looking into the issue.",
+        "createdAt": "2024-01-19T10:00:00"
+      },
+      {
+        "author": "Emma White",
+        "text": "Thank you for the update.",
+        "createdAt": "2024-01-19T10:15:00"
+      }
+    ],
+    "imageLinks": [
+      "https://example.com/images/slow-performance.png"
+    ]
+  },
+  {
+    "id": "TKT007",
+    "title": "Feature request: Dark mode",
+    "priority": "low",
+    "status": "New",
+    "creator": "Olivia Green",
+    "business": "Tech Innovators",
+    "assignee": "",
+    "createdAt": "2024-01-20T14:30:00",
+    "updates": 0,
+    "description": "User requests a dark mode feature for the application.",
+    "comments": [],
+    "imageLinks": []
+  },
+  {
+    "id": "TKT008",
+    "title": "Payment gateway timeout",
+    "priority": "high",
+    "status": "Completed",
+    "creator": "Liam Black",
+    "business": "Finance Solutions",
+    "assignee": "Sarah Parker",
+    "createdAt": "2024-01-21T16:00:00",
+    "updates": 6,
+    "description": "User reports a timeout issue with the payment gateway.",
+    "comments": [
+      {
+        "author": "Sarah Parker",
+        "text": "The timeout issue has been resolved.",
+        "createdAt": "2024-01-22T09:00:00"
+      },
+      {
+        "author": "Liam Black",
+        "text": "Great, thank you!",
+        "createdAt": "2024-01-22T09:15:00"
+      }
+    ],
+    "imageLinks": [
+      "https://example.com/images/payment-timeout.png"
+    ]
+  },
+  {
+    "id": "TKT009",
+    "title": "Email notifications not working",
+    "priority": "medium",
+    "status": "Open",
+    "creator": "Sophia Blue",
+    "business": "Marketing Corp",
+    "assignee": "David Brown",
+    "createdAt": "2024-01-22T10:15:00",
+    "updates": 3,
+    "description": "User reports that email notifications are not being sent.",
+    "comments": [
+      {
+        "author": "David Brown",
+        "text": "We are investigating the issue.",
+        "createdAt": "2024-01-22T10:30:00"
+      },
+      {
+        "author": "Sophia Blue",
+        "text": "Please let me know once it's resolved.",
+        "createdAt": "2024-01-22T10:45:00"
+      }
+    ],
+    "imageLinks": [
+      "https://example.com/images/email-notifications.png"
+    ]
+  },
+  {
+    "id": "TKT010",
+    "title": "Database connection error",
+    "priority": "high",
+    "status": "In Progress",
+    "creator": "James Red",
+    "business": "Data Solutions",
+    "assignee": "Emma White",
+    "createdAt": "2024-01-23T13:45:00",
+    "updates": 5,
+    "description": "User reports a database connection error.",
+    "comments": [
+      {
+        "author": "Emma White",
+        "text": "We are working on fixing the database connection.",
+        "createdAt": "2024-01-23T14:00:00"
+      },
+      {
+        "author": "James Red",
+        "text": "Thank you for the update.",
+        "createdAt": "2024-01-23T14:15:00"
+      }
+    ],
+    "imageLinks": [
+      "https://example.com/images/database-error.png"
+    ]
+  },
+  {
+    "id": "TKT011",
+    "title": "Bug in user registration form",
+    "priority": "medium",
+    "status": "New",
+    "creator": "Charlotte Yellow",
+    "business": "Web Services Inc",
+    "assignee": "",
+    "createdAt": "2024-01-24T11:30:00",
+    "updates": 0,
+    "description": "User reports a bug in the user registration form.",
+    "comments": [],
+    "imageLinks": []
+  },
+  {
+    "id": "TKT012",
+    "title": "Request for API documentation",
+    "priority": "low",
+    "status": "Completed",
+    "creator": "Benjamin Purple",
+    "business": "Tech Innovators",
+    "assignee": "Liam Black",
+    "createdAt": "2024-01-25T15:00:00",
+    "updates": 1,
+    "description": "User requests updated API documentation.",
+    "comments": [
+      {
+        "author": "Liam Black",
+        "text": "The API documentation has been updated.",
+        "createdAt": "2024-01-25T16:00:00"
+      },
+      {
+        "author": "Benjamin Purple",
+        "text": "Thanks!",
+        "createdAt": "2024-01-25T16:15:00"
+      }
+    ],
+    "imageLinks": [
+      "https://example.com/images/api-documentation.png"
+    ]
+  },
+  {
+    "id": "TKT013",
+    "title": "Login page design feedback",
+    "priority": "low",
+    "status": "Open",
+    "creator": "Amelia Orange",
+    "business": "Design Studio",
+    "assignee": "Olivia Green",
+    "createdAt": "2024-01-26T09:00:00",
+    "updates": 2,
+    "description": "User provides feedback on the login page design.",
+    "comments": [
+      {
+        "author": "Olivia Green",
+        "text": "Thank you for the feedback. We will review it.",
+        "createdAt": "2024-01-26T09:30:00"
+      },
+      {
+        "author": "Amelia Orange",
+        "text": "You're welcome!",
+        "createdAt": "2024-01-26T09:45:00"
+      }
+    ],
+    "imageLinks": [
+      "https://example.com/images/login-page.png"
+    ]
+  },
+  {
+    "id": "TKT014",
+    "title": "Security vulnerability report",
+    "priority": "high",
+    "status": "In Progress",
+    "creator": "Lucas Pink",
+    "business": "Security Experts",
+    "assignee": "James Red",
+    "createdAt": "2024-01-27T14:45:00",
+    "updates": 4,
+    "description": "User reports a security vulnerability in the system.",
+    "comments": [
+      {
+        "author": "James Red",
+        "text": "We are addressing the security vulnerability.",
+        "createdAt": "2024-01-27T15:00:00"
+      },
+      {
+        "author": "Lucas Pink",
+        "text": "Please keep me updated.",
+        "createdAt": "2024-01-27T15:15:00"
+      }
+    ],
+    "imageLinks": [
+      "https://example.com/images/security-vulnerability.png"
+    ]
+  },
+  {
+    "id": "TKT015",
+    "title": "Feature request: Multi-language support",
+    "priority": "medium",
+    "status": "New",
+    "creator": "Mia Brown",
+    "business": "Global Solutions",
+    "assignee": "",
+    "createdAt": "2024-01-28T12:30:00",
+    "updates": 0,
+    "description": "User requests multi-language support for the application.",
+    "comments": [],
+    "imageLinks": []
+  },
+  {
+    "id": "TKT016",
+    "title": "Issue with file uploads",
+    "priority": "high",
+    "status": "Completed",
+    "creator": "Ethan Gray",
+    "business": "Cloud Services",
+    "assignee": "Charlotte Yellow",
+    "createdAt": "2024-01-29T10:00:00",
+    "updates": 3,
+    "description": "User reports an issue with file uploads.",
+    "comments": [
+      {
+        "author": "Charlotte Yellow",
+        "text": "The file upload issue has been resolved.",
+        "createdAt": "2024-01-29T11:00:00"
+      },
+      {
+        "author": "Ethan Gray",
+        "text": "Thank you!",
+        "createdAt": "2024-01-29T11:15:00"
+      }
+    ],
+    "imageLinks": [
+      "https://example.com/images/file-upload.png"
+    ]
+  },
+  {
+    "id": "TKT017",
+    "title": "Request for training session",
+    "priority": "low",
+    "status": "Open",
+    "creator": "Ava White",
+    "business": "Training Solutions",
+    "assignee": "Benjamin Purple",
+    "createdAt": "2024-01-30T14:00:00",
+    "updates": 1,
+    "description": "User requests a training session for the new features.",
+    "comments": [
+      {
+        "author": "Benjamin Purple",
+        "text": "We will schedule a training session soon.",
+        "createdAt": "2024-01-30T14:30:00"
+      },
+      {
+        "author": "Ava White",
+        "text": "Great, looking forward to it.",
+        "createdAt": "2024-01-30T14:45:00"
+      }
+    ],
+    "imageLinks": [
+      "https://example.com/images/training-session.png"
+    ]
+  },
+  {
+    "id": "TKT018",
+    "title": "Error in report generation",
+    "priority": "medium",
+    "status": "In Progress",
+    "creator": "William Black",
+    "business": "Analytics Corp",
+    "assignee": "Amelia Orange",
+    "createdAt": "2024-01-31T11:15:00",
+    "updates": 2,
+    "description": "User reports an error in the report generation module.",
+    "comments": [
+      {
+        "author": "Amelia Orange",
+        "text": "We are investigating the report generation error.",
+        "createdAt": "2024-01-31T11:30:00"
+      },
+      {
+        "author": "William Black",
+        "text": "Thank you for the update.",
+        "createdAt": "2024-01-31T11:45:00"
+      }
+    ],
+    "imageLinks": [
+      "https://example.com/images/report-error.png"
+    ]
+  },
+  {
+    "id": "TKT019",
+    "title": "Feedback on new dashboard",
+    "priority": "low",
+    "status": "New",
+    "creator": "Isabella Green",
+    "business": "Tech Innovators",
+    "assignee": "",
+    "createdAt": "2024-02-01T09:30:00",
+    "updates": 0,
+    "description": "User provides feedback on the new dashboard design.",
+    "comments": [],
+    "imageLinks": []
+  },
+  {
+    "id": "TKT020",
+    "title": "Request for additional storage",
+    "priority": "high",
+    "status": "Completed",
+    "creator": "Henry Blue",
+    "business": "Storage Solutions",
+    "assignee": "Lucas Pink",
+    "createdAt": "2024-02-02T13:00:00",
+    "updates": 3,
+    "description": "User requests additional storage space for their account.",
+    "comments": [
+      {
+        "author": "Lucas Pink",
+        "text": "Additional storage has been allocated.",
+        "createdAt": "2024-02-02T14:00:00"
+      },
+      {
+        "author": "Henry Blue",
+        "text": "Thank you!",
+        "createdAt": "2024-02-02T14:15:00"
+      }
+    ],
+    "imageLinks": [
+      "https://example.com/images/additional-storage.png"
+    ]
+  }
+]

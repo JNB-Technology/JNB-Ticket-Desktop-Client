@@ -412,7 +412,7 @@ button:focus-visible {
   border-left: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
-  z-index: 100;
+  z-index: 102; /* Ensure it is above the details panel */
   transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: width;
   overflow: hidden;
@@ -540,6 +540,467 @@ button:focus-visible {
 
 .license-lock-indicator svg {
   opacity: 0.9;
+}
+
+.page-container.with-details-panel .main-content {
+  margin-right: 320px;
+}
+
+.details-panel {
+  position: fixed;
+  right: 0;
+  top: var(--top-panel-height);
+  bottom: var(--bottom-panel-height);
+  width: 320px;
+  background: var(--panel-bg-color);
+  border-left: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  z-index: 101; /* Ensure it is above the main content but below the AI panel */
+  overflow: hidden;
+}
+
+.details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+  padding: 12px; /* Add padding to header */
+}
+
+.details-header button {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  font-size: 1.2em;
+}
+
+.details-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.comments-thread {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+  background: var(--bg-color);
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.comment-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px; /* Add padding to content */
+}
+
+.comment-box textarea {
+  flex: 1;
+  height: 36px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  background: var(--bg-color);
+  color: var(--text-color);
+  font-family: inherit;
+  font-size: 0.9em;
+  resize: none;
+  outline: none;
+}
+
+.comment-box .upload-button,
+.comment-box .send-button {
+  height: 36px;
+  width: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  opacity: 0.8;
+}
+
+.comment-box .upload-button:hover,
+.comment-box .send-button:hover {
+  background: var(--hover-nav-bg);
+  border-color: #646cff;
+  opacity: 1;
+}
+
+.app-container.with-details-panel .main-content {
+  margin-right: 320px;
+}
+
+.app-container.with-details-panel .details-panel {
+  right: 320px; /* Shift the details panel left when AI panel is open */
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.tickets-container {
+  flex: 1;
+  overflow-y: auto;
+  margin: 0; /* Remove margin */
+}
+
+.tickets-container.with-details {
+  height: 50%;
+}
+
+.details-container {
+  flex: 1;
+  overflow-y: auto;
+  background-color: var(--panel-bg-color);
+  border-top: 1px solid var(--border-color);
+  padding: 0; /* Remove padding */
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+  padding: 12px; /* Add padding to header */
+}
+
+.details-header h2 {
+  font-size: 1.2em;
+  color: var(--text-color);
+}
+
+.details-header button {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  font-size: 1.2em;
+}
+
+.ticket-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px; /* Add padding to content */
+}
+
+.ticket-info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.assign-button {
+  background-color: var(--renew-button-bg);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.assign-button:hover {
+  background-color: var(--renew-button-hover);
+}
+
+.separator-line {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 0; /* Remove margin */
+}
+
+.ticket-description,
+.ticket-comments,
+.ticket-images {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px; /* Add padding to content */
+}
+
+.comments-thread {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+  background: var(--bg-color);
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.comment {
+  background: var(--panel-bg-color);
+  padding: 8px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.comment-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px; /* Add padding to content */
+}
+
+.comment-box textarea {
+  flex: 1;
+  height: 36px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  background: var(--bg-color);
+  color: var(--text-color);
+  font-family: inherit;
+  font-size: 0.9em;
+  resize: none;
+  outline: none;
+}
+
+.comment-box .upload-button,
+.comment-box .send-button {
+  height: 36px;
+  width: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  opacity: 0.8;
+}
+
+.comment-box .upload-button:hover,
+.comment-box .send-button:hover {
+  background: var(--hover-nav-bg);
+  border-color: #646cff;
+  opacity: 1;
+}
+
+.images-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.images-container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+}
+
+@media (min-width: 1024px) {
+  .details-container {
+    flex-direction: row;
+    gap: 24px;
+  }
+
+  .details-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .ticket-info,
+  .ticket-description,
+  .ticket-comments {
+    flex: 1;
+  }
+
+  .comments-thread {
+    max-height: 200px;
+  }
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.tickets-container {
+  flex: 1;
+  overflow-y: auto;
+  margin: 0; /* Remove margin */
+}
+
+.tickets-container.with-details {
+  height: 50%;
+}
+
+.details-container {
+  flex: 1;
+  overflow-y: auto;
+  background-color: var(--panel-bg-color);
+  border-top: 1px solid var(--border-color);
+  padding: 0; /* Remove padding */
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+  padding: 12px; /* Add padding to header */
+}
+
+.details-header h2 {
+  font-size: 1.2em;
+  color: var(--text-color);
+}
+
+.details-header button {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  font-size: 1.2em;
+}
+
+.ticket-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px; /* Add padding to content */
+}
+
+.ticket-info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.assign-button {
+  background-color: var(--renew-button-bg);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.assign-button:hover {
+  background-color: var(--renew-button-hover);
+}
+
+.separator-line {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 0; /* Remove margin */
+}
+
+.ticket-description,
+.ticket-comments {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px; /* Add padding to content */
+}
+
+.comments-thread {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+  background: var(--bg-color);
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.comment-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px; /* Add padding to content */
+}
+
+.comment-box textarea {
+  flex: 1;
+  height: 36px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  background: var(--bg-color);
+  color: var(--text-color);
+  font-family: inherit;
+  font-size: 0.9em;
+  resize: none;
+  outline: none;
+}
+
+.comment-box .upload-button,
+.comment-box .send-button {
+  height: 36px;
+  width: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  opacity: 0.8;
+}
+
+.comment-box .upload-button:hover,
+.comment-box .send-button:hover {
+  background: var(--hover-nav-bg);
+  border-color: #646cff;
+  opacity: 1;
 }
 
 @media (prefers-color-scheme: light) {

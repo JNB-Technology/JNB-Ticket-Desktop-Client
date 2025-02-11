@@ -10,58 +10,16 @@ export interface Ticket {
   business: string;
   assignee: string;
   createdAt: Date;
-  updates: number; // Added field
+  updates: number;
+  description: string; // Added field
 }
 
-export const mockTickets: Ticket[] = [
-  {
-    id: 'TKT001',
-    title: 'Unable to access dashboard',
-    priority: 'high',
-    status: 'Open',
-    creator: 'John Smith',
-    business: 'Acme Corp',
-    assignee: 'Jane Doe',
-    createdAt: new Date('2024-01-15T10:30:00'),
-    updates: 5
-  },
-  {
-    id: 'TKT002',
-    title: 'Login issue after password reset',
-    priority: 'medium',
-    status: 'In Progress',
-    creator: 'Alice Johnson',
-    business: 'Tech Corp',
-    assignee: 'Bob Wilson',
-    createdAt: new Date('2024-01-16T09:15:00'),
-    updates: 3
-  },
-  {
-    id: 'TKT003',
-    title: 'Need help with API integration',
-    priority: 'low',
-    status: 'New',
-    creator: 'Mike Anderson',
-    business: 'Dev Solutions Ltd',
-    assignee: '', // empty string is unassigned
-    createdAt: new Date('2024-01-17T14:20:00'),
-    updates: 0
-  },
-  {
-    id: 'TKT004',
-    title: 'Update payment gateway configuration',
-    priority: 'high',
-    status: 'Completed',
-    creator: 'Sarah Parker',
-    business: 'Finance Plus Inc',
-    assignee: 'Bob Wilson',
-    createdAt: new Date('2024-01-14T16:45:00'),
-    updates: 8
-  },
-  // Add more mock data as needed
-];
+interface TicketTableProps {
+  tickets: Ticket[];
+  onSelectTicket: (ticket: Ticket) => void;
+}
 
-export const TicketTable: React.FC = () => {
+export const TicketTable: React.FC<TicketTableProps> = ({ tickets, onSelectTicket }) => {
   const formatDate = (date: Date): string => {
     return date.toLocaleDateString('en-US', {
       year: 'numeric',
@@ -102,8 +60,8 @@ export const TicketTable: React.FC = () => {
         </tr>
       </thead>
       <tbody>
-        {mockTickets.map((ticket) => (
-          <tr key={ticket.id} className={getRowClass(ticket)}>
+        {tickets.map((ticket) => (
+          <tr key={ticket.id} className={getRowClass(ticket)} onClick={() => onSelectTicket(ticket)}>
             <td className="ticket-id">{ticket.id}</td>
             <td>{ticket.title}</td>
             <td>

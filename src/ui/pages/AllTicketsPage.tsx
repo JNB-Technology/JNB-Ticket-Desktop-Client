@@ -1,17 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { TicketTable, mockTickets } from '../components/TicketTable/TicketTable';
+import { TicketTable, Ticket } from '../components/TicketTable/TicketTable';
 import { TicketTiles } from '../components/TicketTiles/TicketTiles';
 import { ViewToggle, ViewMode } from '../components/ViewToggle/ViewToggle';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPaperclip, faCommentDots, faTimes, faUserEdit } from '@fortawesome/free-solid-svg-icons';
+import mockTicketsData from '../../mockdata/mockTickets.json';
+
+interface Comment {
+  author: string;
+  text: string;
+  createdAt: string;
+}
+
+interface TicketWithDetails extends Ticket {
+  comments?: Comment[];
+  imageLinks?: string[];
+}
 
 export const AllTicketsPage: React.FC = () => {
   const [viewMode, setViewMode] = useState<ViewMode>('table');
+  const [selectedTicket, setSelectedTicket] = useState<TicketWithDetails | null>(null);
+  const [mockTickets, setMockTickets] = useState<TicketWithDetails[]>([]);
+
+  useEffect(() => {
+    // Parse the JSON data and convert date strings to Date objects
+    const tickets: TicketWithDetails[] = (mockTicketsData as unknown as TicketWithDetails[]).map(ticket => ({
+      ...ticket,
+      createdAt: new Date(ticket.createdAt)
+    }));
+    setMockTickets(tickets);
+  }, []);
 
   const renderContent = () => {
     switch (viewMode) {
       case 'table':
-        return <TicketTable />;
+        return <TicketTable tickets={mockTickets} onSelectTicket={setSelectedTicket} />;
       case 'tiles':
         return <TicketTiles tickets={mockTickets} />;
       case 'json':
@@ -38,14 +63,78 @@ export const AllTicketsPage: React.FC = () => {
           </div>
         );
       default:
-        return <TicketTable />;
+        return <TicketTable tickets={mockTickets} onSelectTicket={setSelectedTicket} />;
     }
   };
 
   return (
     <div className="page-container">
       <ViewToggle currentView={viewMode} onViewChange={setViewMode} />
-      {renderContent()}
+      <div className="content-container">
+        <div className={`tickets-container ${selectedTicket ? 'with-details' : ''}`} style={{ margin: 0 }}>
+          {renderContent()}
+        </div>
+        {selectedTicket && (
+          <div className="details-container" style={{ margin: 0 }}>
+            <div className="details-header">
+              <h2>{selectedTicket.id}</h2>
+              <button onClick={() => setSelectedTicket(null)} title="Close">
+                <FontAwesomeIcon icon={faTimes} />
+              </button>
+            </div>
+            <div className="details-content">
+              <div className="ticket-info">
+                <div className="ticket-info-item">
+                  <strong>Creator:</strong> {selectedTicket.creator}
+                </div>
+                <div className="ticket-info-item">
+                  <strong>Assignee:</strong> {selectedTicket.assignee || 'Unassigned'}
+                  <button className="assign-button" title="Change Assignee">
+                    <FontAwesomeIcon icon={faUserEdit} /> Change Assignee
+                  </button>
+                </div>
+              </div>
+              <hr className="separator-line" />
+              <div className="ticket-description">
+                <h3>Description</h3>
+                <p>{selectedTicket.description}</p>
+              </div>
+              <hr className="separator-line" />
+              <div className="ticket-comments">
+                <h3>Comments</h3>
+                <div className="comments-thread">
+                  {selectedTicket.comments?.map((comment, index) => (
+                    <div key={index} className="comment">
+                      <div className="comment-header">
+                        <strong>{comment.author}</strong> <span>{new Date(comment.createdAt).toLocaleString()}</span>
+                      </div>
+                      <p>{comment.text}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="comment-box">
+                  <textarea placeholder="Add a comment..."></textarea>
+                  <button className="upload-button">
+                    <FontAwesomeIcon icon={faPaperclip} />
+                  </button>
+                  <button className="send-button">
+                    <FontAwesomeIcon icon={faCommentDots} />
+                  </button>
+                </div>
+              </div>
+              <hr className="separator-line" />
+              <div className="ticket-images">
+                <h3>Images</h3>
+                <div className="images-container">
+                  {selectedTicket.imageLinks?.map((link, index) => (
+                    <img key={index} src={link} alt={`Ticket image ${index + 1}`} />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

@@ -5,7 +5,7 @@ import { TicketTable, Ticket } from '../components/TicketTable/TicketTable';
 import { TicketTiles } from '../components/TicketTiles/TicketTiles';
 import { ViewToggle, ViewMode } from '../components/ViewToggle/ViewToggle';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPaperclip, faCommentDots, faTimes, faUserEdit } from '@fortawesome/free-solid-svg-icons';
+import { faPaperclip, faCommentDots, faTimes, faUserEdit, faImage } from '@fortawesome/free-solid-svg-icons';
 import mockTicketsData from '../../mockdata/mockTickets.json';
 
 interface Comment {
@@ -103,19 +103,26 @@ export const AllTicketsPage: React.FC = () => {
               <div className="ticket-comments">
                 <h3>Comments</h3>
                 <div className="comments-thread">
-                  {selectedTicket.comments?.map((comment, index) => (
-                    <div key={index} className="comment">
-                      <div className="comment-header">
-                        <strong>{comment.author}</strong> <span>{new Date(comment.createdAt).toLocaleString()}</span>
+                  {selectedTicket.comments && selectedTicket.comments.length > 0 ? (
+                    selectedTicket.comments.map((comment, index) => (
+                      <div key={index} className="comment">
+                        <div className="comment-header">
+                          <strong>{comment.author}</strong> <span>{new Date(comment.createdAt).toLocaleString()}</span>
+                        </div>
+                        <p>{comment.text}</p>
                       </div>
-                      <p>{comment.text}</p>
-                    </div>
-                  ))}
+                    ))
+                  ) : (
+                    <p>No comments.</p>
+                  )}
                 </div>
                 <div className="comment-box">
                   <textarea placeholder="Add a comment..."></textarea>
                   <button className="upload-button">
                     <FontAwesomeIcon icon={faPaperclip} />
+                  </button>
+                  <button className="image-button">
+                    <FontAwesomeIcon icon={faImage} />
                   </button>
                   <button className="send-button">
                     <FontAwesomeIcon icon={faCommentDots} />

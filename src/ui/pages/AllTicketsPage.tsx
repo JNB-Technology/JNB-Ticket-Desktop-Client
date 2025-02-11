@@ -68,14 +68,14 @@ export const AllTicketsPage: React.FC = () => {
   };
 
   return (
-    <div className="page-container">
+    <div className="page-container" style={{ overflow: 'hidden' }}>
       <ViewToggle currentView={viewMode} onViewChange={setViewMode} />
-      <div className="content-container">
-        <div className={`tickets-container ${selectedTicket ? 'with-details' : ''}`} style={{ margin: 0 }}>
+      <div className="content-container" style={{ overflow: 'hidden' }}>
+        <div className={`tickets-container ${selectedTicket ? 'with-details' : ''}`} style={{ overflowY: 'auto', margin: 0 }}>
           {renderContent()}
         </div>
         {selectedTicket && (
-          <div className="details-container" style={{ margin: 0 }}>
+          <div className="details-container" style={{ overflowY: 'auto', margin: 0 }}>
             <div className="details-header">
               <h2>{selectedTicket.id}</h2>
               <button onClick={() => setSelectedTicket(null)} title="Close">

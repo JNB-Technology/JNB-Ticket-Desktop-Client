@@ -12,6 +12,7 @@ interface Comment {
   author: string;
   text: string;
   createdAt: string;
+  imageLinks?: string[];
 }
 
 interface TicketWithDetails extends Ticket {
@@ -110,6 +111,13 @@ export const AllTicketsPage: React.FC = () => {
                           <strong>{comment.author}</strong> <span>{new Date(comment.createdAt).toLocaleString()}</span>
                         </div>
                         <p>{comment.text}</p>
+                        {comment.imageLinks && comment.imageLinks.length > 0 && (
+                          <div className="comment-images">
+                            {comment.imageLinks.map((link, imgIndex) => (
+                              <img key={imgIndex} src={link} alt={`Comment image ${imgIndex + 1}`} style={{ maxWidth: '150px', height: 'auto' }} />
+                            ))}
+                          </div>
+                        )}
                       </div>
                     ))
                   ) : (

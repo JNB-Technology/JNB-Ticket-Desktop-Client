@@ -14,12 +14,14 @@
       {
         "author": "Jane Doe",
         "text": "Can you provide more details about the issue?",
-        "createdAt": "2024-01-15T11:00:00"
+        "createdAt": "2024-01-15T11:00:00",
+        "imageLinks": ["https://example.com/images/comment1.png"]
       },
       {
         "author": "John Smith",
         "text": "Sure, I get a 404 error when I try to access the dashboard.",
-        "createdAt": "2024-01-15T11:15:00"
+        "createdAt": "2024-01-15T11:15:00",
+        "imageLinks": ["https://example.com/images/comment2.png"]
       }
     ],
     "imageLinks": [
@@ -41,12 +43,14 @@
       {
         "author": "Bob Wilson",
         "text": "Have you tried clearing your browser cache?",
-        "createdAt": "2024-01-16T10:00:00"
+        "createdAt": "2024-01-16T10:00:00",
+        "imageLinks": ["https://example.com/images/comment3.png"]
       },
       {
         "author": "Alice Johnson",
         "text": "Yes, but it didn't help.",
-        "createdAt": "2024-01-16T10:15:00"
+        "createdAt": "2024-01-16T10:15:00",
+        "imageLinks": ["https://example.com/images/comment4.png"]
       }
     ],
     "imageLinks": [
@@ -82,12 +86,14 @@
       {
         "author": "Bob Wilson",
         "text": "The payment gateway configuration has been updated.",
-        "createdAt": "2024-01-15T09:00:00"
+        "createdAt": "2024-01-15T09:00:00",
+        "imageLinks": ["https://example.com/images/comment5.png"]
       },
       {
         "author": "Sarah Parker",
         "text": "Thank you!",
-        "createdAt": "2024-01-15T09:15:00"
+        "createdAt": "2024-01-15T09:15:00",
+        "imageLinks": ["https://example.com/images/comment6.png"]
       }
     ],
     "imageLinks": [
@@ -109,12 +115,14 @@
       {
         "author": "Alice Johnson",
         "text": "Can you provide the URL of the product page?",
-        "createdAt": "2024-01-18T11:30:00"
+        "createdAt": "2024-01-18T11:30:00",
+        "imageLinks": ["https://example.com/images/comment7.png"]
       },
       {
         "author": "David Brown",
         "text": "Sure, it's https://example.com/product/123",
-        "createdAt": "2024-01-18T11:45:00"
+        "createdAt": "2024-01-18T11:45:00",
+        "imageLinks": ["https://example.com/images/comment8.png"]
       }
     ],
     "imageLinks": [
@@ -136,12 +144,14 @@
       {
         "author": "John Smith",
         "text": "We are looking into the issue.",
-        "createdAt": "2024-01-19T10:00:00"
+        "createdAt": "2024-01-19T10:00:00",
+        "imageLinks": ["https://example.com/images/comment9.png"]
       },
       {
         "author": "Emma White",
         "text": "Thank you for the update.",
-        "createdAt": "2024-01-19T10:15:00"
+        "createdAt": "2024-01-19T10:15:00",
+        "imageLinks": ["https://example.com/images/comment10.png"]
       }
     ],
     "imageLinks": [
@@ -177,12 +187,14 @@
       {
         "author": "Sarah Parker",
         "text": "The timeout issue has been resolved.",
-        "createdAt": "2024-01-22T09:00:00"
+        "createdAt": "2024-01-22T09:00:00",
+        "imageLinks": ["https://cdn.pixabay.com/photo/2014/11/13/06/12/boy-529067_1280.jpg"]
       },
       {
         "author": "Liam Black",
         "text": "Great, thank you!",
-        "createdAt": "2024-01-22T09:15:00"
+        "createdAt": "2024-01-22T09:15:00",
+        "imageLinks": ["https://example.com/images/comment12.png"]
       }
     ],
     "imageLinks": [
@@ -204,12 +216,14 @@
       {
         "author": "David Brown",
         "text": "We are investigating the issue.",
-        "createdAt": "2024-01-22T10:30:00"
+        "createdAt": "2024-01-22T10:30:00",
+        "imageLinks": ["https://example.com/images/comment13.png"]
       },
       {
         "author": "Sophia Blue",
         "text": "Please let me know once it's resolved.",
-        "createdAt": "2024-01-22T10:45:00"
+        "createdAt": "2024-01-22T10:45:00",
+        "imageLinks": ["https://example.com/images/comment14.png"]
       }
     ],
     "imageLinks": [
@@ -231,12 +245,14 @@
       {
         "author": "Emma White",
         "text": "We are working on fixing the database connection.",
-        "createdAt": "2024-01-23T14:00:00"
+        "createdAt": "2024-01-23T14:00:00",
+        "imageLinks": ["https://example.com/images/comment15.png"]
       },
       {
         "author": "James Red",
         "text": "Thank you for the update.",
-        "createdAt": "2024-01-23T14:15:00"
+        "createdAt": "2024-01-23T14:15:00",
+        "imageLinks": ["https://example.com/images/comment16.png"]
       }
     ],
     "imageLinks": [
@@ -272,12 +288,14 @@
       {
         "author": "Liam Black",
         "text": "The API documentation has been updated.",
-        "createdAt": "2024-01-25T16:00:00"
+        "createdAt": "2024-01-25T16:00:00",
+        "imageLinks": ["https://example.com/images/comment17.png"]
       },
       {
         "author": "Benjamin Purple",
         "text": "Thanks!",
-        "createdAt": "2024-01-25T16:15:00"
+        "createdAt": "2024-01-25T16:15:00",
+        "imageLinks": ["https://example.com/images/comment18.png"]
       }
     ],
     "imageLinks": [
@@ -299,12 +317,14 @@
       {
         "author": "Olivia Green",
         "text": "Thank you for the feedback. We will review it.",
-        "createdAt": "2024-01-26T09:30:00"
+        "createdAt": "2024-01-26T09:30:00",
+        "imageLinks": ["https://example.com/images/comment19.png"]
       },
       {
         "author": "Amelia Orange",
         "text": "You're welcome!",
-        "createdAt": "2024-01-26T09:45:00"
+        "createdAt": "2024-01-26T09:45:00",
+        "imageLinks": ["https://example.com/images/comment20.png"]
       }
     ],
     "imageLinks": [
@@ -326,12 +346,14 @@
       {
         "author": "James Red",
         "text": "We are addressing the security vulnerability.",
-        "createdAt": "2024-01-27T15:00:00"
+        "createdAt": "2024-01-27T15:00:00",
+        "imageLinks": ["https://example.com/images/comment21.png"]
       },
       {
         "author": "Lucas Pink",
         "text": "Please keep me updated.",
-        "createdAt": "2024-01-27T15:15:00"
+        "createdAt": "2024-01-27T15:15:00",
+        "imageLinks": ["https://example.com/images/comment22.png"]
       }
     ],
     "imageLinks": [
@@ -367,12 +389,14 @@
       {
         "author": "Charlotte Yellow",
         "text": "The file upload issue has been resolved.",
-        "createdAt": "2024-01-29T11:00:00"
+        "createdAt": "2024-01-29T11:00:00",
+        "imageLinks": ["https://example.com/images/comment23.png"]
       },
       {
         "author": "Ethan Gray",
         "text": "Thank you!",
-        "createdAt": "2024-01-29T11:15:00"
+        "createdAt": "2024-01-29T11:15:00",
+        "imageLinks": ["https://example.com/images/comment24.png"]
       }
     ],
     "imageLinks": [
@@ -394,12 +418,14 @@
       {
         "author": "Benjamin Purple",
         "text": "We will schedule a training session soon.",
-        "createdAt": "2024-01-30T14:30:00"
+        "createdAt": "2024-01-30T14:30:00",
+        "imageLinks": ["https://example.com/images/comment25.png"]
       },
       {
         "author": "Ava White",
         "text": "Great, looking forward to it.",
-        "createdAt": "2024-01-30T14:45:00"
+        "createdAt": "2024-01-30T14:45:00",
+        "imageLinks": ["https://example.com/images/comment26.png"]
       }
     ],
     "imageLinks": [
@@ -421,12 +447,14 @@
       {
         "author": "Amelia Orange",
         "text": "We are investigating the report generation error.",
-        "createdAt": "2024-01-31T11:30:00"
+        "createdAt": "2024-01-31T11:30:00",
+        "imageLinks": ["https://example.com/images/comment27.png"]
       },
       {
         "author": "William Black",
         "text": "Thank you for the update.",
-        "createdAt": "2024-01-31T11:45:00"
+        "createdAt": "2024-01-31T11:45:00",
+        "imageLinks": ["https://example.com/images/comment28.png"]
       }
     ],
     "imageLinks": [
@@ -462,12 +490,14 @@
       {
         "author": "Lucas Pink",
         "text": "Additional storage has been allocated.",
-        "createdAt": "2024-02-02T14:00:00"
+        "createdAt": "2024-02-02T14:00:00",
+        "imageLinks": ["https://example.com/images/comment29.png"]
       },
       {
         "author": "Henry Blue",
         "text": "Thank you!",
-        "createdAt": "2024-02-02T14:15:00"
+        "createdAt": "2024-02-02T14:15:00",
+        "imageLinks": ["https://example.com/images/comment30.png"]
       }
     ],
     "imageLinks": [

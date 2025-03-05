@@ -1,9 +1,10 @@
 .ticket-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.9em;
-  margin: -12px;  /* Negative margin to fill container */
-  width: calc(100% + 24px);  /* Compensate for negative margin */
+  background: var(--panel-bg-color);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .ticket-table thead {
@@ -11,11 +12,15 @@
   border-bottom: 1px solid var(--border-color);
 }
 
-.ticket-table th {
-  padding: 8px 12px;
+.ticket-table th, .ticket-table td {
+  padding: 12px 16px;
   text-align: left;
-  font-weight: 500;
-  color: var(--secondary-text);
+}
+
+.ticket-table th {
+  background: var(--header-bg-color);
+  color: var(--header-text-color);
+  font-weight: 600;
   white-space: nowrap;
   cursor: pointer;
   user-select: none;
@@ -26,24 +31,31 @@
 }
 
 .ticket-table td {
-  padding: 8px 12px;
   border-bottom: 1px solid var(--border-color);
   color: var(--text-color);
+}
+
+.ticket-table tr:last-child td {
+  border-bottom: none;
 }
 
 .ticket-table tbody tr:hover {
   background-color: var(--hover-nav-bg);
 }
 
-.priority-badge {
-  padding: 0;
-  font-size: 0.85em;
-  font-weight: 600;
-  background: none !important;
-  border-radius: 0; /* Remove pill shape */
+.ticket-table tr:hover {
+  background: var(--hover-bg-color);
 }
 
-/* Update priority badge colors */
+.priority-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 0px;
+  font-size: 0.85em;
+  font-weight: 500;
+  background: none !important;
+}
+
 .priority-high {
   background-color: var(--priority-high-bg, #ff4d4f20);
   color: var(--priority-high-color, #ff4d4f);
@@ -59,13 +71,13 @@
   color: var(--priority-low-color, #52c41a);
 }
 
-/* Update status badge colors */
 .status-badge {
-  padding: 0;
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
   font-size: 0.85em;
-  font-weight: 600;
+  font-weight: 500;
   background: none !important;
-  border-radius: 0; /* Remove pill shape */
 }
 
 .status-new {
@@ -96,37 +108,35 @@
 }
 
 .updates-badge {
-  background-color: var(--panel-bg-color);
-  color: var(--text-color);
-  padding: 0;
+  display: inline-block;
+  padding: 4px 8px;
   border-radius: 4px;
   font-size: 0.85em;
   font-weight: 500;
-  display: inline-block;
-  min-width: 16px;
-  text-align: center;
   background: none !important;
   color: var(--secondary-text);
+  min-width: 16px;
+  text-align: center;
 }
 
-/* Optional: Add hover effect for the entire row */
 .ticket-table tbody tr {
   cursor: pointer;
 }
 
 .unassigned {
-  color: var(--secondary-text);
+  background: var(--unassigned-bg-color);
+  color: var(--unassigned-text-color);
   font-style: italic;
 }
 
 .assignee-badge {
-  padding: 0;
+  display: inline-block;
+  padding: 4px 8px;
   border-radius: 4px;
   font-size: 0.85em;
   font-weight: 500;
 }
 
-/* Update unassigned colors */
 .assignee-badge.unassigned {
   background-color: var(--unassigned-bg, #8b5cf620);
   color: var(--unassigned-color, #a78bfa);
@@ -155,15 +165,11 @@
   color: #a78bfa;
 }
 
-/* Ensure unassigned tickets keep their styling */
 .unassigned-ticket .status-badge {
   background-color: #8b5cf620;
   color: #a78bfa;
 }
 
-/* ...existing styles... */
-
-/* Update unassigned styling for consistent color */
 .unassigned-ticket td,
 .unassigned-ticket .ticket-id,
 .unassigned-ticket .status-badge,
@@ -181,7 +187,6 @@
   background-color: color-mix(in srgb, var(--unassigned-bg) 80%, white) !important;
 }
 
-/* Remove any conflicting unassigned styles */
 .unassigned-ticket .priority-badge,
 .unassigned-ticket .status-badge {
   background: none !important;
@@ -235,7 +240,6 @@
   color: var(--row-new-color, var(--text-color));
 }
 
-/* Hover states for status rows */
 .ticket-row.status-in-progress:hover {
   background-color: var(--row-in-progress-hover, #0ea5e920);
 }
@@ -252,12 +256,9 @@
   background-color: var(--row-new-hover, var(--hover-nav-bg));
 }
 
-/* Keep badges visible on colored rows */
 .ticket-row .priority-badge,
 .ticket-row .status-badge,
 .ticket-row .updates-badge {
   background: none;
   backdrop-filter: none;
 }
-
-/* ...rest of existing styles... */

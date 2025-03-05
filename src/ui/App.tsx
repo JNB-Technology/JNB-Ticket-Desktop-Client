@@ -33,6 +33,7 @@ import { MyTickets } from './pages/MyTickets';
 import { HistoryPage } from './pages/HistoryPage';
 import { AllTicketsPage } from './pages/AllTicketsPage';
 import LoginScreen from './screens/LoginScreen';
+import CalendarPage from './pages/CalendarPage';
 
 type UserRole = 'agent' | 'super-admin' | 'business-admin' | 'business-employee';
 
@@ -250,7 +251,7 @@ function App(): JSX.Element {
       case 'draftTickets':
         return <h2>Draft Tickets</h2>;
       case 'ticketCalendar':
-        return <h2>Ticket Calendar</h2>;
+        return <CalendarPage />;
       case 'howToGuides':
         return <h2>How-To Guides</h2>;
       default:

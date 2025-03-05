@@ -30,13 +30,13 @@ export const TicketTable: React.FC<TicketTableProps> = ({ tickets, onSelectTicke
     });
   };
 
-  const getPriorityClass = (priority: string): string => {
-    return `priority-badge priority-${priority.toLowerCase()}`;
-  };
+  // const getPriorityClass = (priority: string): string => {
+  //   return `priority-badge priority-${priority.toLowerCase()}`;
+  // };
 
-  const getStatusClass = (status: string): string => {
-    return `status-badge status-${status.toLowerCase().replace(/\s+/g, '-')}`;
-  };
+  // const getStatusClass = (status: string): string => {
+  //   return `status-badge status-${status.toLowerCase().replace(/\s+/g, '-')}`;
+  // };
 
   const getRowClass = (ticket: Ticket): string => {
     const statusClass = `status-${ticket.status.toLowerCase().replace(/\s+/g, '-')}`;
@@ -65,12 +65,12 @@ export const TicketTable: React.FC<TicketTableProps> = ({ tickets, onSelectTicke
             <td className="ticket-id">{ticket.id}</td>
             <td>{ticket.title}</td>
             <td>
-              <span className={getPriorityClass(ticket.priority)}>
+              <span>
                 {ticket.priority}
               </span>
             </td>
             <td>
-              <span className={getStatusClass(ticket.status)}>
+              <span>
                 {ticket.status}
               </span>
             </td>

@@ -1,198 +1,233 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faChevronRight, faPlus } from '@fortawesome/free-solid-svg-icons';
 import mockTicketsData from '../../mockdata/mockTickets.json';
 import './CalendarPage.css';
 
-interface Ticket {
-  id: string;
-  title: string;
-  priority: 'high' | 'medium' | 'low';
-  status: string;
-  creator: string;
-  business: string;
-  assignee: string;
-  createdAt: Date;
-  updates: number;
-  description: string;
-}
-
-const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-const timeSlots = Array.from({ length: 24 * 4 }, (_, i) => {
-  const hours = Math.floor(i / 4).toString().padStart(2, '0');
-  const minutes = ((i % 4) * 15).toString().padStart(2, '0');
-  return `${hours}:${minutes}`;
-});
-
-const getDaysInMonth = (date: Date) => {
-  const year = date.getFullYear();
-  const month = date.getMonth();
-  const firstDay = new Date(year, month, 1);
-  const lastDay = new Date(year, month + 1, 0);
-
-  const daysFromPrevMonth = firstDay.getDay();
-  const prevMonth = new Date(year, month - 1, 0);
-  const prevMonthDays = Array.from({ length: daysFromPrevMonth }, (_, i) => ({
-    date: new Date(year, month - 1, prevMonth.getDate() - daysFromPrevMonth + i + 1),
-    isCurrentMonth: false,
-  }));
-
-  const currentMonthDays = Array.from({ length: lastDay.getDate() }, (_, i) => ({
-    date: new Date(year, month, i + 1),
-    isCurrentMonth: true,
-  }));
-
-  const remainingDays = 42 - (prevMonthDays.length + currentMonthDays.length);
-  const nextMonthDays = Array.from({ length: remainingDays }, (_, i) => ({
-    date: new Date(year, month + 1, i + 1),
-    isCurrentMonth: false,
-  }));
-
-  return [...prevMonthDays, ...currentMonthDays, ...nextMonthDays];
-};
-
-const formatMonth = (date: Date) => date.toLocaleString('default', { month: 'long', year: 'numeric' });
+type ViewType = 'day' | 'week' | 'month';
 
 const CalendarPage: React.FC = () => {
-  const [tickets, setTickets] = useState<Ticket[]>([]);
-  const [currentDate, setCurrentDate] = useState<Date>(new Date());
-  const [currentTimePosition, setCurrentTimePosition] = useState(0);
-  const [currentTime, setCurrentTime] = useState<Date>(new Date());
-  const timeContainerRef = useRef<HTMLDivElement>(null);
+  const [view, setView] = useState<ViewType>('week');
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [tickets, setTickets] = useState<any[]>([]);
 
   useEffect(() => {
-    const parsedTickets: Ticket[] = (mockTicketsData as unknown as Ticket[]).map(ticket => ({
+    const parsedTickets = (mockTicketsData as any[]).map(ticket => ({
       ...ticket,
-      createdAt: new Date(ticket.createdAt),
+      start: new Date(ticket.createdAt),
+      end: new Date(new Date(ticket.createdAt).getTime() + 60 * 60 * 1000), // 1 hour duration
     }));
     setTickets(parsedTickets);
   }, []);
 
-  const updateCurrentTime = () => {
-    const now = new Date();
-    setCurrentTime(now);
-    const totalMinutes = now.getHours() * 60 + now.getMinutes();
-    const position = (totalMinutes / 1440) * (timeContainerRef.current?.scrollHeight || 0);
-    setCurrentTimePosition(position);
+  const timeSlots = Array.from({ length: 48 }, (_, i) => {
+    const hour = Math.floor(i / 2);
+    const minutes = i % 2 === 0 ? '00' : '30';
+    return `${hour.toString().padStart(2, '0')}:${minutes}`;
+  });
 
-    if (timeContainerRef.current) {
-      const containerHeight = timeContainerRef.current.clientHeight;
-      const scrollPosition = position - containerHeight / 2;
-      timeContainerRef.current.scrollTop = scrollPosition;
+  const getDaysInView = () => {
+    const days = [];
+    const startDate = new Date(currentDate);
+    
+    if (view === 'day') {
+      days.push(startDate);
+    } else if (view === 'week') {
+      startDate.setDate(currentDate.getDate() - currentDate.getDay());
+      for (let i = 0; i < 7; i++) {
+        days.push(new Date(startDate.setDate(startDate.getDate() + (i === 0 ? 0 : 1))));
+      }
+    } else if (view === 'month') {
+      const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+      const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+      
+      // Add days from previous month to start the calendar from Sunday
+      const startPadding = firstDay.getDay();
+      for (let i = startPadding - 1; i >= 0; i--) {
+        const date = new Date(firstDay);
+        date.setDate(firstDay.getDate() - i - 1);
+        days.push(date);
+      }
+      
+      // Add all days of current month
+      for (let i = 1; i <= lastDay.getDate(); i++) {
+        days.push(new Date(currentDate.getFullYear(), currentDate.getMonth(), i));
+      }
+      
+      // Add days from next month to complete the grid
+      const endPadding = 42 - days.length; // 6 rows * 7 days = 42
+      for (let i = 1; i <= endPadding; i++) {
+        const date = new Date(lastDay);
+        date.setDate(lastDay.getDate() + i);
+        days.push(date);
+      }
     }
+    return days;
   };
 
-  useEffect(() => {
-    updateCurrentTime();
-    const interval = setInterval(updateCurrentTime, 60000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const formatTimeDisplay = (date: Date) => {
-    return date.toLocaleTimeString([], {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false,
+  const getTicketsForTimeSlot = (date: Date, timeSlot: string) => {
+    return tickets.filter(ticket => {
+      const ticketDate = new Date(ticket.start);
+      const [hours, minutes] = timeSlot.split(':').map(Number);
+      return ticketDate.getHours() === hours && 
+             Math.floor(ticketDate.getMinutes() / 30) * 30 === minutes &&
+             ticketDate.getDate() === date.getDate() &&
+             ticketDate.getMonth() === date.getMonth() &&
+             ticketDate.getFullYear() === date.getFullYear();
     });
   };
 
   const isToday = (date: Date) => {
     const today = new Date();
-    return (
-      date.getDate() === today.getDate() &&
-      date.getMonth() === today.getMonth() &&
-      date.getFullYear() === today.getFullYear()
-    );
+    return date.getDate() === today.getDate() &&
+           date.getMonth() === today.getMonth() &&
+           date.getFullYear() === today.getFullYear();
   };
 
-  const getTicketsForDay = (day: { date: Date }) => {
-    return tickets.filter(ticket => {
-      const ticketDate = new Date(ticket.createdAt);
-      return (
-        ticketDate.getDate() === day.date.getDate() &&
-        ticketDate.getMonth() === day.date.getMonth() &&
-        ticketDate.getFullYear() === day.date.getFullYear()
-      );
-    });
-  };
-
-  const EventBadge: React.FC<{ ticket: Ticket }> = ({ ticket }) => {
-    const priorityColors = {
-      high: 'bg-red-200 text-red-800',
-      medium: 'bg-yellow-200 text-yellow-800',
-      low: 'bg-green-200 text-green-800',
-      default: 'bg-blue-200 text-blue-800',
-    };
-
-    return (
-      <div
-        className={`
-          ${priorityColors[ticket.priority] || priorityColors.default}
-          text-xs px-2 py-0.5 rounded-full truncate max-w-[90%]
-          hover:z-10 hover:scale-105 transition-transform cursor-pointer
-        `}
-        title={`${ticket.title} - ${new Date(ticket.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`}
-      >
-        {ticket.title}
-      </div>
-    );
+  const handleNavigate = (direction: 'prev' | 'next') => {
+    const newDate = new Date(currentDate);
+    
+    switch (view) {
+      case 'day':
+        newDate.setDate(newDate.getDate() + (direction === 'next' ? 1 : -1));
+        break;
+      case 'week':
+        newDate.setDate(newDate.getDate() + (direction === 'next' ? 7 : -7));
+        break;
+      case 'month':
+        newDate.setMonth(newDate.getMonth() + (direction === 'next' ? 1 : -1));
+        break;
+    }
+    setCurrentDate(newDate);
   };
 
   return (
-    <div className="calendar-page">
-      <div className="calendar-header">
-        <button
-          onClick={() => setCurrentDate(new Date(currentDate.setMonth(currentDate.getMonth() - 1)))}
-          className="calendar-nav-button"
-        >
-          ←
-        </button>
-        <div className="calendar-header-title">
-          <h2>{formatMonth(currentDate)}</h2>
-          <div className="current-time">{formatTimeDisplay(currentTime)}</div>
+    <div className="calendar-container">
+      <header className="calendar-header">
+        <div className="calendar-nav">
+          <button onClick={() => setCurrentDate(new Date())}>Today</button>
+          <button onClick={() => handleNavigate('prev')}>
+            <FontAwesomeIcon icon={faChevronLeft} />
+          </button>
+          <button onClick={() => handleNavigate('next')}>
+            <FontAwesomeIcon icon={faChevronRight} />
+          </button>
+          <h2>{currentDate.toLocaleDateString('default', { 
+            month: 'long', 
+            year: 'numeric',
+            day: view === 'day' ? 'numeric' : undefined
+          })}</h2>
         </div>
-        <button
-          onClick={() => setCurrentDate(new Date(currentDate.setMonth(currentDate.getMonth() + 1)))}
-          className="calendar-nav-button"
-        >
-          →
-        </button>
-      </div>
-
-      <div className="calendar-grid">
-        {daysOfWeek.map(day => (
-          <div key={day} className="calendar-header-day">
-            {day}
-          </div>
-        ))}
-        {getDaysInMonth(currentDate).map((day, idx) => (
-          <div
-            key={idx}
-            className={`
-              calendar-day
-              ${day.isCurrentMonth ? 'current-month' : 'other-month'}
-              ${isToday(day.date) ? 'today' : ''}
-            `}
+        <div className="view-options">
+          <button 
+            className={view === 'day' ? 'active' : ''} 
+            onClick={() => setView('day')}
           >
-            <span className="date">{day.date.getDate()}</span>
-            <div className="tickets">
-              {getTicketsForDay(day).map((ticket, ticketIdx) => (
-                <EventBadge key={ticketIdx} ticket={ticket} />
+            Day
+          </button>
+          <button 
+            className={view === 'week' ? 'active' : ''} 
+            onClick={() => setView('week')}
+          >
+            Week
+          </button>
+          <button 
+            className={view === 'month' ? 'active' : ''} 
+            onClick={() => setView('month')}
+          >
+            Month
+          </button>
+        </div>
+        <button className="create-event">
+          <FontAwesomeIcon icon={faPlus} /> Create
+        </button>
+      </header>
+
+      <div className={`calendar-grid ${view}`}>
+        {view === 'month' ? (
+          <div className="month-grid">
+            {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
+              <div key={day} className="month-header">{day}</div>
+            ))}
+            {getDaysInView().map((date, idx) => (
+              <div 
+                key={idx} 
+                className={`month-cell ${isToday(date) ? 'today' : ''} ${
+                  date.getMonth() === currentDate.getMonth() ? 'current-month' : 'other-month'
+                }`}
+              >
+                <span className="date-number">{date.getDate()}</span>
+                <div className="month-events">
+                  {tickets
+                    .filter(ticket => {
+                      const ticketDate = new Date(ticket.start);
+                      return ticketDate.getDate() === date.getDate() &&
+                             ticketDate.getMonth() === date.getMonth() &&
+                             ticketDate.getFullYear() === date.getFullYear();
+                    })
+                    .slice(0, 3) // Show only first 3 events
+                    .map((ticket, ticketIdx) => (
+                      <div 
+                        key={ticketIdx}
+                        className={`month-event priority-${ticket.priority}`}
+                        title={ticket.title}
+                      >
+                        {ticket.title}
+                      </div>
+                    ))
+                  }
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="calendar-grid">
+            <div className="time-axis">
+              {timeSlots.map(time => (
+                <div key={time} className="time-slot">
+                  <span>{time}</span>
+                </div>
+              ))}
+            </div>
+            <div className="days-grid" style={{ 
+              gridTemplateColumns: `repeat(${getDaysInView().length}, 1fr)` 
+            }}>
+              {getDaysInView().map((date, dayIndex) => (
+                <div key={dayIndex} className={`day-column ${isToday(date) ? 'today' : ''}`}>
+                  <div className={`day-header ${isToday(date) ? 'today' : ''}`}>
+                    <span className="day-name">
+                      {date.toLocaleDateString('default', { weekday: 'short' })}
+                    </span>
+                    <span className="day-number">
+                      {date.getDate()}
+                    </span>
+                  </div>
+                  <div className="time-slots">
+                    {timeSlots.map((timeSlot, timeIndex) => (
+                      <div key={timeIndex} className="calendar-cell">
+                        {getTicketsForTimeSlot(date, timeSlot).map((ticket, ticketIndex) => (
+                          <div 
+                            key={ticketIndex}
+                            className={`event-block priority-${ticket.priority}`}
+                            title={ticket.title}
+                          >
+                            <span className="event-time">
+                              {new Date(ticket.start).toLocaleTimeString([], { 
+                                hour: '2-digit', 
+                                minute: '2-digit' 
+                              })}
+                            </span>
+                            <span className="event-title">{ticket.title}</span>
+                          </div>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                </div>
               ))}
             </div>
           </div>
-        ))}
-      </div>
-
-      <div className="time-panel" ref={timeContainerRef}>
-        {timeSlots.map((time, idx) => (
-          <div key={idx} className="time-slot">
-            <span>{time}</span>
-          </div>
-        ))}
-        <div className="current-time-indicator" style={{ top: `${currentTimePosition}px` }}>
-          <div className="current-time-label">{formatTimeDisplay(currentTime)}</div>
-          <div className="current-time-line"></div>
-        </div>
+        )}
       </div>
     </div>
   );

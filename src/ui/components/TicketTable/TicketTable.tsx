@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { TicketDetailsOverlay } from '../TicketDetailsOverlay/TicketDetailsOverlay';
 import './TicketTable.css';
 
 export interface Ticket {
@@ -20,6 +21,8 @@ interface TicketTableProps {
 }
 
 export const TicketTable: React.FC<TicketTableProps> = ({ tickets, onSelectTicket }) => {
+  const [selectedTicket, setSelectedTicket] = useState<Ticket | null>(null);
+
   const formatDate = (date: Date): string => {
     return date.toLocaleDateString('en-US', {
       year: 'numeric',
@@ -30,14 +33,6 @@ export const TicketTable: React.FC<TicketTableProps> = ({ tickets, onSelectTicke
     });
   };
 
-  // const getPriorityClass = (priority: string): string => {
-  //   return `priority-badge priority-${priority.toLowerCase()}`;
-  // };
-
-  // const getStatusClass = (status: string): string => {
-  //   return `status-badge status-${status.toLowerCase().replace(/\s+/g, '-')}`;
-  // };
-
   const getRowClass = (ticket: Ticket): string => {
     const statusClass = `status-${ticket.status.toLowerCase().replace(/\s+/g, '-')}`;
     const unassignedClass = !ticket.assignee ? 'unassigned-ticket' : '';
@@ -45,51 +40,67 @@ export const TicketTable: React.FC<TicketTableProps> = ({ tickets, onSelectTicke
   };
 
   return (
-    <table className="ticket-table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Title</th>
-          <th>Priority</th>
-          <th>Status</th>
-          <th>Creator</th>
-          <th>Business</th>
-          <th>Assignee</th>
-          <th>Updates</th>
-          <th>Created At</th>
-        </tr>
-      </thead>
-      <tbody>
-        {tickets.map((ticket) => (
-          <tr key={ticket.id} className={getRowClass(ticket)} onClick={() => onSelectTicket(ticket)}>
-            <td className="ticket-id">{ticket.id}</td>
-            <td>{ticket.title}</td>
-            <td>
-              <span>
-                {ticket.priority}
-              </span>
-            </td>
-            <td>
-              <span>
-                {ticket.status}
-              </span>
-            </td>
-            <td>{ticket.creator}</td>
-            <td>{ticket.business}</td>
-            <td>
-              <span className={`assignee-badge ${!ticket.assignee ? 'unassigned' : ''}`}>
-                {ticket.assignee || 'UNASSIGNED'}
-              </span>
-            </td>
-            <td>
-              <span className="updates-badge">
-                {ticket.updates}
-              </span>
-            </td>
-            <td>{formatDate(ticket.createdAt)}</td>
+    <>
+      <table className="ticket-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Priority</th>
+            <th>Status</th>
+            <th>Creator</th>
+            <th>Business</th>
+            <th>Assignee</th>
+            <th>Updates</th>
+            <th>Created At</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {tickets.map((ticket) => (
+            <tr 
+              key={ticket.id} 
+              className={getRowClass(ticket)} 
+              onClick={() => {
+                setSelectedTicket(ticket);
+                onSelectTicket(ticket);
+              }}
+            >
+              <td className="ticket-id">{ticket.id}</td>
+              <td>{ticket.title}</td>
+              <td>
+                <span>
+                  {ticket.priority}
+                </span>
+              </td>
+              <td>
+                <span>
+                  {ticket.status}
+                </span>
+              </td>
+              <td>{ticket.creator}</td>
+              <td>{ticket.business}</td>
+              <td>
+                <span className={`assignee-badge ${!ticket.assignee ? 'unassigned' : ''}`}>
+                  {ticket.assignee || 'UNASSIGNED'}
+                </span>
+              </td>
+              <td>
+                <span className="updates-badge">
+                  {ticket.updates}
+                </span>
+              </td>
+              <td>{formatDate(ticket.createdAt)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      {selectedTicket && (
+        <TicketDetailsOverlay
+          ticket={selectedTicket}
+          onClose={() => setSelectedTicket(null)}
+        />
+      )}
+    </>
   );
 };

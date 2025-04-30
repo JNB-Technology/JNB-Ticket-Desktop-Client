@@ -7,7 +7,14 @@ import {
   faImage, 
   faCommentDots,
   faComment,
-  faImages
+  faImages,
+  faClock,
+  faUser,
+  faBuilding,
+  faExclamationTriangle,
+  faCheckCircle,
+  faCircle,
+  faHistory
 } from '@fortawesome/free-solid-svg-icons';
 import { Ticket } from '../TicketTable/TicketTable';
 import './TicketDetailsOverlay.css';
@@ -29,34 +36,101 @@ interface TicketDetailsOverlayProps {
   onClose: () => void;
 }
 
-type TabType = 'details' | 'comments' | 'images';
+type TabType = 'details' | 'comments' | 'images' | 'history';
 
 export const TicketDetailsOverlay: React.FC<TicketDetailsOverlayProps> = ({ ticket, onClose }) => {
   const [activeTab, setActiveTab] = useState<TabType>('details');
+  const [newComment, setNewComment] = useState('');
   const commentCount = ticket.comments?.length || 0;
   const imageCount = ticket.imageLinks?.length || 0;
+
+  const formatDate = (date: Date): string => {
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  };
+
+  const getStatusIcon = () => {
+    switch (ticket.status.toLowerCase()) {
+      case 'completed':
+        return faCheckCircle;
+      case 'in progress':
+        return faCircle;
+      case 'open':
+        return faExclamationTriangle;
+      default:
+        return faCircle;
+    }
+  };
 
   const renderTabContent = () => {
     switch (activeTab) {
       case 'details':
         return (
-          <>
-            <div className="ticket-info">
-              <div className="ticket-info-item">
-                <strong>Creator:</strong> {ticket.creator}
+          <div className="ticket-details-content">
+            <div className="ticket-header">
+              <div className="ticket-title-section">
+                <h2>{ticket.title}</h2>
+                <div className="ticket-meta">
+                  <span className={`priority-badge priority-${ticket.priority}`}>
+                    {ticket.priority}
+                  </span>
+                  <span className={`status-badge status-${ticket.status.toLowerCase().replace(/\s+/g, '-')}`}>
+                    <FontAwesomeIcon icon={getStatusIcon()} />
+                    {ticket.status}
+                  </span>
+                </div>
               </div>
-              <div className="ticket-info-item">
-                <strong>Assignee:</strong> {ticket.assignee || 'Unassigned'}
-                <button className="assign-button" title="Change Assignee">
-                  <FontAwesomeIcon icon={faUserEdit} /> Change Assignee
+              <div className="ticket-actions">
+                <button className="action-button" title="Edit Ticket">
+                  <FontAwesomeIcon icon={faUserEdit} />
+                </button>
+                <button className="action-button" title="Close Ticket">
+                  <FontAwesomeIcon icon={faTimes} />
                 </button>
               </div>
             </div>
+
+            <div className="ticket-info-grid">
+              <div className="info-item">
+                <FontAwesomeIcon icon={faUser} />
+                <div>
+                  <label>Creator</label>
+                  <span>{ticket.creator}</span>
+                </div>
+              </div>
+              <div className="info-item">
+                <FontAwesomeIcon icon={faBuilding} />
+                <div>
+                  <label>Business</label>
+                  <span>{ticket.business}</span>
+                </div>
+              </div>
+              <div className="info-item">
+                <FontAwesomeIcon icon={faUserEdit} />
+                <div>
+                  <label>Assignee</label>
+                  <span>{ticket.assignee || 'Unassigned'}</span>
+                </div>
+              </div>
+              <div className="info-item">
+                <FontAwesomeIcon icon={faClock} />
+                <div>
+                  <label>Created</label>
+                  <span>{formatDate(ticket.createdAt)}</span>
+                </div>
+              </div>
+            </div>
+
             <div className="ticket-description">
               <h3>Description</h3>
               <p>{ticket.description}</p>
             </div>
-          </>
+          </div>
         );
 
       case 'comments':
@@ -67,8 +141,14 @@ export const TicketDetailsOverlay: React.FC<TicketDetailsOverlayProps> = ({ tick
                 ticket.comments.map((comment, index) => (
                   <div key={index} className="comment">
                     <div className="comment-header">
-                      <strong>{comment.author}</strong>
-                      <span>{new Date(comment.createdAt).toLocaleString()}</span>
+                      <div className="comment-author">
+                        <FontAwesomeIcon icon={faUser} />
+                        <strong>{comment.author}</strong>
+                      </div>
+                      <span className="comment-time">
+                        <FontAwesomeIcon icon={faClock} />
+                        {new Date(comment.createdAt).toLocaleString()}
+                      </span>
                     </div>
                     <p>{comment.text}</p>
                     {comment.imageLinks && comment.imageLinks.length > 0 && (
@@ -90,15 +170,23 @@ export const TicketDetailsOverlay: React.FC<TicketDetailsOverlayProps> = ({ tick
               )}
             </div>
             <div className="comment-box">
-              <textarea placeholder="Add a comment..."></textarea>
+              <textarea 
+                placeholder="Add a comment..." 
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+              />
               <div className="comment-actions">
-                <button className="upload-button">
+                <button className="upload-button" title="Attach file">
                   <FontAwesomeIcon icon={faPaperclip} />
                 </button>
-                <button className="image-button">
+                <button className="image-button" title="Add image">
                   <FontAwesomeIcon icon={faImage} />
                 </button>
-                <button className="send-button">
+                <button 
+                  className="send-button" 
+                  title="Send comment"
+                  disabled={!newComment.trim()}
+                >
                   <FontAwesomeIcon icon={faCommentDots} />
                 </button>
               </div>
@@ -126,21 +214,35 @@ export const TicketDetailsOverlay: React.FC<TicketDetailsOverlayProps> = ({ tick
             )}
           </div>
         );
+
+      case 'history':
+        return (
+          <div className="history-section">
+            <div className="history-timeline">
+              <div className="history-item">
+                <div className="history-icon">
+                  <FontAwesomeIcon icon={faCircle} />
+                </div>
+                <div className="history-content">
+                  <div className="history-header">
+                    <strong>Ticket Created</strong>
+                    <span>{formatDate(ticket.createdAt)}</span>
+                  </div>
+                  <p>Ticket was created by {ticket.creator}</p>
+                </div>
+              </div>
+              {/* Add more history items here */}
+            </div>
+          </div>
+        );
     }
   };
 
   return (
     <div className="ticket-details-overlay">
-      <div className="ticket-details-content">
+      <div className="ticket-details-container">
         <div className="details-header">
-          <h2>{ticket.id}</h2>
-          <button onClick={onClose} title="Close">
-            <FontAwesomeIcon icon={faTimes} />
-          </button>
-        </div>
-
-        <div className="tabs-container">
-          <div className="tabs-header">
+          <div className="tabs-container">
             <button
               className={`tab-button ${activeTab === 'details' ? 'active' : ''}`}
               onClick={() => setActiveTab('details')}
@@ -161,10 +263,21 @@ export const TicketDetailsOverlay: React.FC<TicketDetailsOverlayProps> = ({ tick
               <FontAwesomeIcon icon={faImages} />
               Images {imageCount > 0 && <span className="count">{imageCount}</span>}
             </button>
+            <button
+              className={`tab-button ${activeTab === 'history' ? 'active' : ''}`}
+              onClick={() => setActiveTab('history')}
+            >
+              <FontAwesomeIcon icon={faHistory} />
+              History
+            </button>
           </div>
-          <div className="tab-content">
-            {renderTabContent()}
-          </div>
+          <button onClick={onClose} title="Close">
+            <FontAwesomeIcon icon={faTimes} />
+          </button>
+        </div>
+
+        <div className="tab-content">
+          {renderTabContent()}
         </div>
       </div>
     </div>
